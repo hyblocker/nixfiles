@@ -31,3 +31,7 @@
 [class*='member'] [class*='container']:has([class*='badges']) {
     display: none;
 }
+
+section[class^="panels_"]>div[class^="wrapper_"] {
+    padding-top: 1rem;
+}
