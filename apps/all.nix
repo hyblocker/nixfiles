@@ -10,5 +10,6 @@
     ./browsers.nix
     ./core.nix
     ./vscode.nix
+    ./steam.nix
   ];
 }

@@ -6,12 +6,6 @@
 }:
 
 {
-  programs = {
-    steam = {
-      enable = true;
-    };
-  };
-
   nixpkgs.config.allowUnfree = true;
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "bak";

@@ -55,6 +55,7 @@
 
   # --- Nix ---
   nixpkgs.config.allowUnfree = true;
+  programs.nix-ld.enable = true; # Make it easier to run Steam crap
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
