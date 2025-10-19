@@ -33,6 +33,7 @@
               terminal.integrated.stickyScroll.enabled = false;
               chat.disableAiFeatures = true;
               "nix.enableLanguageServer" = true;
+              "C_Cpp.intelliSenseEngine" = "disabled"; # conflicts with clangd, which has better intellisense lol
             };
 
             extensions = with pkgs.vscode-extensions; [
