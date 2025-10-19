@@ -19,72 +19,25 @@
             push.autoSetupRemote = true;
           };
         };
-        fastfetch = {
+        hyfetch = {
           enable = true;
           settings = {
-            "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json";
-            logo = {
-              source = ''
-                $1          ▗▄▄▄       ▗▄▄▄▄    ▄▄▄▖
-                $1          ▜███▙       ▜███▙  ▟███▛
-                $1           ▜███▙       ▜███▙▟███▛
-                $1            ▜███▙       ▜██████▛
-                $1     ▟█████████████████▙ ▜████▛     ▟▙
-                $2    ▟███████████████████▙ ▜███▙    ▟██▙
-                $2           ▄▄▄▄▖           ▜███▙  ▟███▛
-                $2          ▟███▛             ▜██▛ ▟███▛
-                $2         ▟███▛               ▜▛ ▟███▛
-                $2▟███████████▛                  ▟██████████▙
-                $3▜██████████▛                  ▟███████████▛
-                $3      ▟███▛ ▟▙               ▟███▛
-                $3     ▟███▛ ▟██▙             ▟███▛
-                $3    ▟███▛  ▜███▙           ▝▀▀▀▀
-                $3    ▜██▛    ▜███▙ ▜██████████████████▛
-                $4     ▜▛     ▟████▙ ▜████████████████▛
-                $4           ▟██████▙       ▜███▙
-                $4          ▟███▛▜███▙       ▜███▙
-                $4         ▟███▛  ▜███▙       ▜███▙
-                $4         ▝▀▀▀    ▀▀▀▀▘       ▀▀▀▘'';
-              type = "data";
-              color = {
-                "1" = "yellow";
-                "2" = "white";
-                "3" = "magenta";
-                "4" = "black";
-              };
+            preset = "nonbinary";
+            mode = "rgb";
+            auto_detect_light_dark = true;
+            light_dark = "dark";
+            lightness = 0.65;
+            color_align = {
+              mode = "horizontal";
             };
-            "modules" = [
-              "title"
-              "separator"
-              "os"
-              "host"
-              "kernel"
-              "uptime"
-              "packages"
-              "shell"
-              "display"
-              "de"
-              "wm"
-              "wmtheme"
-              "theme"
-              "icons"
-              "font"
-              "cursor"
-              "terminal"
-              "terminalfont"
-              "cpu"
-              "gpu"
-              "memory"
-              "swap"
-              "disk"
-              "localip"
-              "battery"
-              "poweradapter"
-              "locale"
-              "break"
-              "colors"
-            ];
+            backend = "fastfetch";
+            args = null;
+            distro = null;
+            pride_month_disable = false;
           };
+        };
+        fastfetch = {
+          enable = true;
         };
       };
     };
