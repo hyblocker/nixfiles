@@ -43,6 +43,8 @@
         nerd-fonts.droid-sans-mono
         cascadia-code
         mission-center
+        #(pkgs.callPackage ../pkgs/icons/hatter-icons.nix)
+        hatterIcons
       ];
       imports = [
         inputs.nixcord.homeModules.nixcord

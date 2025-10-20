@@ -16,6 +16,12 @@
     nixcord.url = "github:kaylorben/nixcord";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    stylix = {
+      url = "github:danth/stylix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -26,14 +32,28 @@
       home-manager,
       nixcord,
       nixos-hardware,
+      stylix,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      overlays = import ./overlays { inherit inputs; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlays.additions ];
+      };
+    in
+
     {
 
       baseModules = [
         ./common/base.nix
         ./common/lux.nix
         home-manager.nixosModules.home-manager
+        stylix.nixosModules.default
+        {
+          nixpkgs.overlays = [ overlays.additions ];
+        }
       ];
 
       devModules = [
