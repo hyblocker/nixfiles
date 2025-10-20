@@ -32,6 +32,6 @@
     display: none;
 }
 
-section[class^="panels_"]>div[class^="wrapper_"] {
+section[class^="panels_"]>div[class^="wrapper_"]>div[class^="container_"] {
     padding-top: 1rem;
 }
