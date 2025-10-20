@@ -8,17 +8,17 @@
 }:
 
 let
-  pname = "hatterIcons";
+  pname = "hatter-icon-theme";
 in
 stdenvNoCC.mkDerivation rec {
   inherit pname;
-  version = "20.10.25"; # date i pulled on lol
+  version = "2025-10-20";
 
   src = fetchFromGitHub {
     owner = "Mibea";
     repo = "Hatter";
-    rev = "master";
-    hash = "sha256-1169i75cll5lahc8iwy7pwajy5273nkim6ywzf5j09gh94pzbm1b";
+    rev = "0b4dfa4f577ec2514562c56419386deda53c26da";
+    hash = "sha256-K9T1L0nwJSCL+9ybGqcdRxQvFb/H84gYVLRQysqJyYQ=";
   };
 
   nativeBuildInputs = [
@@ -26,9 +26,7 @@ stdenvNoCC.mkDerivation rec {
     jdupes
   ];
 
-  buildInputs = [
-    hicolor-icon-theme
-  ];
+  buildInputs = [ hicolor-icon-theme ];
 
   # These fixup steps are slow and unnecessary
   dontPatchELF = true;
@@ -41,10 +39,18 @@ stdenvNoCC.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    ./install.sh --dest $out/share/icons
+
+    ./install.sh --dest $out/share/icons \
+      --name Hatter 
+
     jdupes --link-soft --recurse $out/share
+
     runHook postInstall
   '';
+
+  # if we dont have these it'll fail with symlinks
+  dontFixup = true;
+  fixupPhase = "true";
 
   meta = with lib; {
     description = "Hatter - a modern and playful Linux icon theme";
