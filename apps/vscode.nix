@@ -28,12 +28,13 @@
             userSettings = {
               editor.formatOnSave = true;
               editor.cursorSmoothCaretAnimation = true;
+              editor.renderWhitespace = "all";
               window.autoDetectColorScheme = true;
               terminal.integrated.enableMultiLinePasteWarning = false;
               terminal.integrated.stickyScroll.enabled = false;
               chat.disableAiFeatures = true;
-              "nix.enableLanguageServer" = true;
-              "C_Cpp.intelliSenseEngine" = "disabled"; # conflicts with clangd, which has better intellisense lol
+              nix.enableLanguageServer = true;
+              C_Cpp.intelliSenseEngine = "disabled"; # conflicts with clangd, which has better intellisense lol
             };
 
             extensions = with pkgs.vscode-extensions; [
