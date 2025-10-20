@@ -29,6 +29,7 @@
       dig
       file
       nmap
+      htop
     ];
   };
 
@@ -41,6 +42,7 @@
         nerd-fonts._0xproto
         nerd-fonts.droid-sans-mono
         cascadia-code
+        mission-center
       ];
       imports = [
         inputs.nixcord.homeModules.nixcord
