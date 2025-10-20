@@ -1,21 +1,20 @@
 {
-  description = "A simple NixOS flake";
+  description = "Lux's NixOS config";
 
   inputs = {
-    # NixOS unstable
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    # NixOS 25.05
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixcord.url = "github:kaylorben/nixcord";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    stylix = {
+      url = "github:danth/stylix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,8 +25,18 @@
       home-manager,
       nixcord,
       nixos-hardware,
+      stylix,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      overlays = import ./overlays { inherit inputs; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlays.additions ];
+      };
+    in
+
     {
 
       baseModules = [
@@ -40,6 +49,7 @@
         ./common/lux-gui.nix
         ./apps/all.nix
         ./gui/kde-plasma.nix
+        stylix.nixosModules.stylix
       ]
       ++ self.baseModules;
 

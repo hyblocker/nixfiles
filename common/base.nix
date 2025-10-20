@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   lib,
   ...
@@ -26,6 +27,9 @@
   programs = {
     adb.enable = true;
   };
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
 
   # --- User account ---
   users.users.lux = {
@@ -54,7 +58,12 @@
   };
 
   # --- Nix ---
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfreePredicate = _: true;
+      allowUnfree = true;
+    };
+  };
   programs.nix-ld.enable = true; # Make it easier to run Steam crap
   nix.settings.experimental-features = [
     "nix-command"
