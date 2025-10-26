@@ -6,6 +6,38 @@
 }:
 
 {
+  environment.systemPackages = with pkgs; [
+    (chromium.override {
+      enableWideVine = true;
+      commandLineArgs = [
+        # "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+        # "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+        # "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+        # "--ignore-gpu-blocklist"
+        # "--enable-zero-copy"
+        "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled"
+      ];
+
+    })
+  ];
+  programs.chromium = {
+    enable = true;
+    extraOpts = {
+      "BrowserSignin" = 0;
+      "SyncDisabled" = true;
+      "PasswordManagerEnabled" = false;
+      "SpellcheckEnabled" = true;
+      "SpellcheckLanguage" = [
+        "en-GB"
+      ];
+    };
+    extensions = [
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+      "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+    ];
+  };
+
   home-manager.users.lux =
     { pkgs, ... }:
     {
