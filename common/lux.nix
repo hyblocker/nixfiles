@@ -45,6 +45,7 @@
         cascadia-code
         mission-center
         (pkgs.callPackage ../pkgs/icons/hatter-icons.nix { })
+        whitesur-icon-theme
       ];
 
       imports = [
