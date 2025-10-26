@@ -18,11 +18,4 @@
     layout = "us";
     variant = "";
   };
-
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml"; # @FIXME: TEMP
-  stylix.icons.enable = true;
-  stylix.icons.package = pkgs.hatterIcons;
-  stylix.icons.dark = "Hatter-dark";
-  stylix.icons.light = "Hatter-light";
 }

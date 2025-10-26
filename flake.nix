@@ -11,10 +11,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixcord.url = "github:kaylorben/nixcord";
-    stylix = {
-      url = "github:danth/stylix/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -25,7 +21,6 @@
       home-manager,
       nixcord,
       nixos-hardware,
-      stylix,
       ...
     }:
     let
@@ -49,7 +44,6 @@
         ./common/lux-gui.nix
         ./apps/all.nix
         ./gui/kde-plasma.nix
-        stylix.nixosModules.stylix
       ]
       ++ self.baseModules;
 
