@@ -12,26 +12,12 @@
   # --- Bootloader ---
   services.fwupd.enable = true;
 
+  # --- Hardware ---
   hardware.framework.amd-7040.preventWakeOnAC = true;
-
-  networking.hostName = "fartwork";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Enable bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  # Enable CUPS to print documents.
+  networking.networkmanager.enable = true;
   services.printing.enable = true;
-
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -46,6 +32,14 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  # --- Networking ---
+  networking.hostName = "fartwork";
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

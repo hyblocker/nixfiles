@@ -39,6 +39,9 @@
     ];
   };
 
+  # --- hardware acceleration ---
+  hardware.graphics.enable = true;
+
   # --- locale / timezone ---
   time.timeZone = "Europe/Malta";
   i18n.defaultLocale = "en_GB.UTF-8";
