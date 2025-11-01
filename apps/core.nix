@@ -12,10 +12,9 @@
       programs = {
         git = {
           enable = true;
-          userName = "Hyblocker";
-          userEmail = "hyblocker@protonmail.com";
-
-          extraConfig = {
+          settings = {
+            user.name = "Hyblocker";
+            user.email = "hyblocker@protonmail.com";
             push.autoSetupRemote = true;
             init.defaultBranch = "main";
           };

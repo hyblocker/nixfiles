@@ -56,6 +56,7 @@
         enable = true;
         discord.enable = false;
         vesktop.enable = true;
+        vesktop.useSystemVencord = false;
         config = {
           enableReactDevtools = true;
           autoUpdate = true;
