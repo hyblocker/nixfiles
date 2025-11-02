@@ -15,7 +15,7 @@
         # "--enable-features=UseMultiPlaneFormatForHardwareVideo"
         # "--ignore-gpu-blocklist"
         # "--enable-zero-copy"
-        "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled"
+        # "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled" # google nuked it in fucking 139
         "--disable-features=GlobalShortcutsPortal"
       ];
 
@@ -23,8 +23,13 @@
   ];
   programs.chromium = {
     enable = true;
+    # https://chromeenterprise.google/policies/
     extraOpts = {
+      "AIModeSettings" = 1; # fuck gen ai
+      "GeminiSettings" = 1;
       "BrowserSignin" = 0;
+      "SearchSuggestEnabled" = false;
+      "UrlKeyedAnonymizedDataCollectionEnabled" = false;
       "SyncDisabled" = true;
       "PasswordManagerEnabled" = false;
       "SpellcheckEnabled" = true;
@@ -33,8 +38,8 @@
       ];
     };
     extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-      # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+      # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
     ];
   };
