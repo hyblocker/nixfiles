@@ -34,12 +34,17 @@
     ];
   };
 
+  # yubikey udev rules
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+
   home-manager.users.lux =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
         atool
         httpie
+        htop
+        mpv
         nerd-fonts._0xproto
         nerd-fonts.droid-sans-mono
         cascadia-code
