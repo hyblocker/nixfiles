@@ -13,6 +13,7 @@
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
       gamescopeSession.enable = true;
+      protontricks.enable = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ]; # Enable proton ge for better game compat
     };
   };
