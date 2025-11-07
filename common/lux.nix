@@ -47,11 +47,16 @@
         mpv
         nerd-fonts._0xproto
         nerd-fonts.droid-sans-mono
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
         cascadia-code
         mission-center
         (pkgs.callPackage ../pkgs/icons/hatter-icons.nix { })
         whitesur-icon-theme
       ];
     };
+
+  # Enable bitmap font rendering (icons aka emojis)
+  fonts.fontconfig.useEmbeddedBitmaps = true;
 
 }
