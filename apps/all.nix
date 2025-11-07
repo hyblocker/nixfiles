@@ -9,6 +9,7 @@
   imports = [
     ./browsers.nix
     ./core.nix
+    ./discord
     ./vscode.nix
     ./steam.nix
   ];
