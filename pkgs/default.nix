@@ -7,4 +7,5 @@
 {
   # example = pkgs.callPackage ./example { };
   hatterIcons = pkgs.callPackage ./icons/hatter-icons.nix { };
+  fluxpose = pkgs.callPackage ./fluxpose { };
 }
