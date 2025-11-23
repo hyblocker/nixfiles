@@ -15,7 +15,7 @@
         # "--enable-features=UseMultiPlaneFormatForHardwareVideo"
         # "--ignore-gpu-blocklist"
         # "--enable-zero-copy"
-        # "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled" # google nuked it in fucking 139
+        "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled" # google nuked it in fucking 139
         "--disable-features=GlobalShortcutsPortal"
       ];
 
@@ -38,6 +38,7 @@
       ];
     };
     extensions = [
+      "hlepfoohegkhhmjieoechaddaejaokhf" # refined github
       # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
