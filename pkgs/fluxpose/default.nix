@@ -25,12 +25,8 @@ stdenv.mkDerivation rec {
   dontBuild = true;
 
   installPhase = ''
-    # Create the destination directory for the application assets
     localAppDir="$out/lib/${pname}"
     mkdir -p $localAppDir
-
-    # Copy all contents of the published 'net8.0' directory into the output
-    # This preserves the required relative file structure (DLLs, JSONs, etc.)
     cp -r net8.0/* $localAppDir/
 
     # Create the command wrappers
@@ -40,6 +36,7 @@ stdenv.mkDerivation rec {
     export DOTNET_ROOT=${aspNetRuntime}
     exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/FluxPose_Master.dll "\$@"
     EOF
+
     cat > $out/bin/fluxpose-ui << EOF
     #!${stdenv.shell}/bin/bash
     export DOTNET_ROOT=${aspNetRuntime}
