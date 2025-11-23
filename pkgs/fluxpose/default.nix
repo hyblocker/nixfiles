@@ -33,21 +33,23 @@ stdenv.mkDerivation rec {
     # This preserves the required relative file structure (DLLs, JSONs, etc.)
     cp -r net8.0/* $localAppDir/
 
-    # --- 3. Create the 'fluxpose' command wrapper ---
+    # Create the command wrappers
     mkdir -p $out/bin
     cat > $out/bin/fluxpose << EOF
     #!${stdenv.shell}/bin/bash
-
-    # Set the path to the ASP.NET Core runtime to satisfy shared framework dependencies
     export DOTNET_ROOT=${aspNetRuntime}
-
-    # Execute the application using the dotnet host and the application's entry-point DLL
-    exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/fluxpose.dll "\$@"
+    exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/FluxPose_Master.dll "\$@"
+    EOF
+    cat > $out/bin/fluxpose-ui << EOF
+    #!${stdenv.shell}/bin/bash
+    export DOTNET_ROOT=${aspNetRuntime}
+    exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/FluxPose_UI.dll "\$@"
     EOF
 
     chmod +x $out/bin/fluxpose
+    chmod +x $out/bin/fluxpose-ui
 
-    # --- Setup udev rules for the dock and dongle ---
+    # Setup udev rules for the dock and dongle
     mkdir -p $out/lib/udev/rules.d
     cat > $out/lib/udev/rules.d/50-fluxpose-device.rules << EOF
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2FE3", ATTRS{idProduct}=="6856", MODE="0660", GROUP="plugdev"
