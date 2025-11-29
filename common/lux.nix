@@ -51,8 +51,9 @@
         noto-fonts-color-emoji
         cascadia-code
         mission-center
-        (pkgs.callPackage ../pkgs/icons/hatter-icons.nix { })
         whitesur-icon-theme
+        hatter-icons
+        fluxpose
       ];
     };
 
