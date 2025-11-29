@@ -20,6 +20,7 @@
   services.printing.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  services.hardware.bolt.enable = true; # thunberbolt
   services.pipewire = {
     enable = true;
     alsa.enable = true;
