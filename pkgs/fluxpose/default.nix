@@ -2,11 +2,14 @@
   lib,
   stdenv,
   dotnetCorePackages,
+  makeDesktopItem,
+  pkgs,
+  unzip,
 }:
 
 let
-  dotnetRuntime = dotnetCorePackages.runtime_8_0-bin;
   aspNetRuntime = dotnetCorePackages.aspnetcore_8_0-bin;
+  dotnet = dotnetCorePackages.dotnet_8;
 in
 
 stdenv.mkDerivation rec {
@@ -15,32 +18,29 @@ stdenv.mkDerivation rec {
 
   src = ./fluxpose.zip;
 
-  buildInputs = [
-    dotnetRuntime
-    aspNetRuntime
-  ];
+  nativeBuildInputs = [ unzip ];
+  buildInputs = [ aspNetRuntime ];
 
-  # The archive unpacks into a 'net8.0' directory, which is handled automatically
   dontConfigure = true;
   dontBuild = true;
 
   installPhase = ''
     localAppDir="$out/lib/${pname}"
     mkdir -p $localAppDir
-    cp -r net8.0/* $localAppDir/
+    cp -r ./. $localAppDir/
 
     # Create the command wrappers
     mkdir -p $out/bin
     cat > $out/bin/fluxpose << EOF
-    #!${stdenv.shell}/bin/bash
-    export DOTNET_ROOT=${aspNetRuntime}
-    exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/FluxPose_Master.dll "\$@"
+    #!${stdenv.shell}
+    export DOTNET_ROOT=${dotnet.runtime}/share/dotnet
+    exec ${dotnet.runtime}/bin/dotnet $localAppDir/FluxPose_Master.dll "\$@"
     EOF
 
     cat > $out/bin/fluxpose-ui << EOF
-    #!${stdenv.shell}/bin/bash
-    export DOTNET_ROOT=${aspNetRuntime}
-    exec ${dotnetCorePackages.dotnet}/bin/dotnet $localAppDir/FluxPose_UI.dll "\$@"
+    #!${stdenv.shell}
+    export DOTNET_ROOT=${dotnet.aspnetcore}/share/dotnet
+    exec ${dotnet.aspnetcore}/bin/dotnet $localAppDir/FluxPose_UI.dll "\$@"
     EOF
 
     chmod +x $out/bin/fluxpose
@@ -52,6 +52,21 @@ stdenv.mkDerivation rec {
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2FE3", ATTRS{idProduct}=="6856", MODE="0660", GROUP="plugdev"
     EOF
   '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "fluxpose";
+      desktopName = "Fluxpose";
+      comment = "EMF Full body tracking";
+      icon = "fluxpose";
+      exec = "fluxpose-ui";
+      terminal = false;
+      categories = [
+        "Utility"
+        "Application"
+      ];
+    })
+  ];
 
   meta = with lib; {
     description = "EMF based VR full body tracking runtime";
