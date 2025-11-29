@@ -35,6 +35,15 @@
 
   # --- Networking ---
   networking.hostName = "fartwork";
+  networking.extraHosts = ''
+    10.101.64.121 login.wifionice.de
+    172.18.1.110 iceportal.de
+    172.18.1.110 zugportal.de
+    172.18.1.110 www.iceportal.de
+    172.18.1.100 fileme-serien.iceportal.de
+    172.18.1.100 api.filme-serien.iceportal.de
+    172.18.1.100 assets.fileme-serien.iceportal.de
+  '';
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
