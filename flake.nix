@@ -56,6 +56,9 @@
           {
             _module.args = { inherit inputs; };
           }
+          {
+            nixpkgs.overlays = [ overlays.additions ];
+          }
           ./devices/fartwork/configuration.nix
           ./devices/fartwork/hardware-configuration.nix
           nixos-hardware.nixosModules.framework-13-7040-amd
