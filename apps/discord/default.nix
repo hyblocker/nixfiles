@@ -45,7 +45,7 @@
             unindent.enable = true;
             unlockedAvatarZoom.enable = true;
             userMessagesPronouns.enable = true;
-            USRBG.enable = true;
+            usrbg.enable = true;
             validUser.enable = true;
             viewIcons.enable = true;
             voiceChatDoubleClick.enable = true;
