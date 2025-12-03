@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  niri,
   ...
 }:
 
@@ -9,6 +10,7 @@
   home-manager.users.lux =
     { pkgs, ... }:
     {
+      #imports = [ niri.homeModules.niri ];
       programs = {
         git = {
           enable = true;
