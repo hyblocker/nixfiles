@@ -12,7 +12,8 @@
       programs = {
         vscode = {
           enable = true;
-
+          # extensions should be read-only
+          mutableExtensionsDir = false;
           # https://github.com/continuedev/continue/issues/821#issuecomment-3227673526
           package = (
             pkgs.vscode.overrideAttrs (
