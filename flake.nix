@@ -24,6 +24,7 @@
       home-manager,
       nixcord,
       nixos-hardware,
+      niri,
       ...
     }:
     let
@@ -41,16 +42,19 @@
         ./common/base.nix
         ./common/lux.nix
         home-manager.nixosModules.home-manager
+        niri.nixosModules.niri
       ];
 
       devModules = [
         ./common/lux-gui.nix
         ./apps/all.nix
         ./gui/kde-plasma.nix
+        # ./gui/niri.nix
       ]
       ++ self.baseModules;
 
       nixosConfigurations.fartwork = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
           {
