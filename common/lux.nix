@@ -53,6 +53,7 @@
         mission-center
         whitesur-icon-theme
         hatter-icons
+        papirus-icon-theme
         fluxpose
       ];
     };
