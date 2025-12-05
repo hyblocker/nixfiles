@@ -21,6 +21,8 @@
     xwayland-satellite-unstable
     playerctl
     brightnessctl
+    waybar
+    fuzzel
   ];
 
   home-manager.users.lux =
