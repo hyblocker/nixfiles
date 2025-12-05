@@ -18,6 +18,7 @@
         nerd-fonts._0xproto
         nerd-fonts.droid-sans-mono
         cascadia-code
+        signal-desktop
       ];
       fonts.fontconfig.enable = true;
     };
