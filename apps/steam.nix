@@ -7,6 +7,10 @@
 
 {
   programs = {
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -24,11 +28,6 @@
   hardware.xpadneo.enable = true;
   hardware.opentabletdriver.enable = true;
   services.udev.packages = [ pkgs.dolphin-emu ]; # dolphin gamecube controller udev rules
-
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
 
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
