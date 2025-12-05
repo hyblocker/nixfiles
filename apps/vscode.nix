@@ -28,14 +28,16 @@
           profiles.default = {
             userSettings = {
               editor.formatOnSave = true;
-              editor.cursorSmoothCaretAnimation = true;
+              editor.cursorSmoothCaretAnimation = "on";
               editor.renderWhitespace = "all";
               window.autoDetectColorScheme = true;
               terminal.integrated.enableMultiLinePasteWarning = false;
               terminal.integrated.stickyScroll.enabled = false;
-              chat.disableAiFeatures = true;
+              chat.disableAIFeatures = true;
               nix.enableLanguageServer = true;
               C_Cpp.intelliSenseEngine = "disabled"; # conflicts with clangd, which has better intellisense lol
+              gitlens.ai.enabled = false;
+              workbench.settings.showAISearchToggle = false;
             };
 
             extensions = with pkgs.vscode-extensions; [
