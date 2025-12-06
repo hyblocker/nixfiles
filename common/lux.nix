@@ -24,7 +24,6 @@
 
       # cli
       wget
-      clang-tools
       nil
       nixfmt
       dig

@@ -55,6 +55,7 @@
 
       devModules = [
         ./common/lux-gui.nix
+        ./common/dev.nix
         ./apps/all.nix
         ./gui/kde-plasma.nix
         ./gui/niri.nix
