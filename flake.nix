@@ -58,7 +58,7 @@
         ./common/dev.nix
         ./apps/all.nix
         ./gui/kde-plasma.nix
-        ./gui/niri.nix
+        ./gui/niri
       ]
       ++ self.baseModules;
 

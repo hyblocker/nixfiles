@@ -23,11 +23,14 @@
     brightnessctl
     waybar
     fuzzel
+    mako # notification daemon
   ];
 
   home-manager.users.lux =
     { pkgs, ... }:
     {
+      imports = [ inputs.noctalia.homeModules.default ];
+
       programs.niri = {
         # settings = {
         # outputs."eDP-1".scale = 2.0;
