@@ -26,11 +26,13 @@
     mako # notification daemon
   ];
 
+  imports = [
+    ./noctalia.nix
+  ];
+
   home-manager.users.lux =
     { pkgs, ... }:
     {
-      imports = [ inputs.noctalia.homeModules.default ];
-
       programs.niri = {
         # settings = {
         # outputs."eDP-1".scale = 2.0;
