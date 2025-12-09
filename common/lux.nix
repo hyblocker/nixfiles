@@ -30,6 +30,9 @@
       file
       nmap
       htop
+
+      ffmpeg
+      yt-dlp
     ];
   };
 
