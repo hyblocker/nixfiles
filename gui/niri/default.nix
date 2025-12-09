@@ -12,13 +12,16 @@
 
   programs.niri.enable = true;
   environment.variables.NIXOS_OZONE_WL = "1";
+  environment.variables.QT_QPA_PLATFORMTHEME = "gtk3";
   environment.systemPackages = with pkgs; [
     wl-clipboard
     wayland-utils
     libsecret
     cage
     gamescope
+    nautilus
     xwayland-satellite-unstable
+    xdg-desktop-portal-shana
     playerctl
     brightnessctl
     waybar
@@ -34,11 +37,9 @@
     { pkgs, ... }:
     {
       programs.niri = {
-        # settings = {
-        # outputs."eDP-1".scale = 2.0;
-        # "Mod-Q".action = close-window;
-        # "";
-        # };
+        config = ''
+          ${lib.fileContents ./niri-config.kdl}
+        '';
       };
     };
 }
