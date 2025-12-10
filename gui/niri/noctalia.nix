@@ -282,7 +282,7 @@
             wifiEnabled = true;
           };
           sessionMenu = {
-            enableCountdown = true;
+            enableCountdown = false;
             countdownDuration = 10000;
             position = "center";
             showHeader = true;
