@@ -292,11 +292,7 @@
                 enabled = true;
               }
               {
-                action = "suspend";
-                enabled = true;
-              }
-              {
-                action = "hibernate";
+                action = "logout";
                 enabled = true;
               }
               {
@@ -304,11 +300,15 @@
                 enabled = true;
               }
               {
-                action = "logout";
+                action = "suspend";
                 enabled = true;
               }
               {
                 action = "shutdown";
+                enabled = true;
+              }
+              {
+                action = "hibernate";
                 enabled = true;
               }
             ];
