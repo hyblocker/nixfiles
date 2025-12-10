@@ -6,6 +6,7 @@
   makeDesktopItem,
   pkgs,
   unzip,
+  wrapGAppsHook3,
 }:
 
 let
@@ -20,6 +21,7 @@ stdenv.mkDerivation rec {
   src = ./fluxpose.zip;
 
   nativeBuildInputs = [
+    wrapGAppsHook3
     copyDesktopItems
     unzip
     pkgs.imagemagick
