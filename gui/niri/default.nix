@@ -24,10 +24,12 @@
     xdg-desktop-portal-shana
     playerctl
     brightnessctl
-    waybar
     fuzzel
     mako # notification daemon
   ];
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   imports = [
     ./noctalia.nix
