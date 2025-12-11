@@ -3,12 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-bleeding.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixcord = {
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +34,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      nixpkgs-bleeding,
       home-manager,
       nixcord,
       nixos-hardware,
@@ -43,6 +45,14 @@
       system = "x86_64-linux";
       overlays = import ./overlays { inherit inputs; };
       pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlays.additions ];
+      };
+      pkgs-stable = import nixpkgs-stable {
+        inherit system;
+        overlays = [ overlays.additions ];
+      };
+      pkgs-bleeding = import nixpkgs-bleeding {
         inherit system;
         overlays = [ overlays.additions ];
       };
@@ -67,7 +77,7 @@
       ++ self.baseModules;
 
       nixosConfigurations.fartwork = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs pkgs-stable pkgs-bleeding; };
         system = "x86_64-linux";
         modules = [
           {

@@ -5,6 +5,7 @@
   config,
   lib,
   pkgs,
+  pkgs-stable,
   modulesPath,
   ...
 }:
@@ -21,8 +22,8 @@
     "usb_storage"
     "sd_mod"
   ];
-  # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackages_6_17; # 6.18 is fucked rn (https://github.com/NixOS/nixpkgs/issues/467803); zen uses 6.18
+  boot.kernelPackages = pkgs-stable.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linuxPackages_6_17; # 6.18 is fucked on unstable rn (https://github.com/NixOS/nixpkgs/issues/467803); zen uses 6.18
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
