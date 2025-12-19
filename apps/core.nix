@@ -41,6 +41,12 @@
         fastfetch = {
           enable = true;
         };
+        bash = {
+          enable = true;
+          shellAliases = {
+            wokefetch = "hyfetch";
+          };
+        };
       };
     };
 }
