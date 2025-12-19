@@ -21,6 +21,7 @@
       wireshark
       kdePackages.kate
       thunderbird-latest-unwrapped
+      vrcx
 
       # cli
       wget
