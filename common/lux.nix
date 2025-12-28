@@ -15,7 +15,7 @@
     packages = with pkgs; [
       # gui
       prismlauncher
-      # vesktop
+      peazip
       parsec-bin
       spotify
       wireshark
