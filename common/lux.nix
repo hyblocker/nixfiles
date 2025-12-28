@@ -34,6 +34,10 @@
 
       ffmpeg
       yt-dlp
+
+      # WE GAMING
+      unnamed-sdvx-clone
+      parsec-bin
     ];
   };
 
