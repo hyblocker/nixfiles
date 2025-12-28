@@ -10,7 +10,23 @@
   home-manager.users.lux =
     { pkgs, ... }:
     {
-      #imports = [ niri.homeModules.niri ];
+      # Set default browser and other stuff
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplications = {
+          "text/html" = "chromium-browser.desktop";
+          "x-scheme-handler/http" = "chromium-browser.desktop";
+          "x-scheme-handler/https" = "chromium-browser.desktop";
+          "x-scheme-handler/about" = "chromium-browser.desktop";
+          "x-scheme-handler/unknown" = "chromium-browser.desktop";
+
+          "application/zip" = [ "peazip.desktop" ];
+          "application/x-7z-compressed" = [ "peazip.desktop" ];
+          "application/x-rar" = [ "peazip.desktop" ];
+          "application/x-tar" = [ "peazip.desktop" ];
+        };
+      };
+
       programs = {
         git = {
           enable = true;

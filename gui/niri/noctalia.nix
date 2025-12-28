@@ -321,8 +321,8 @@
             backgroundOpacity = 1;
             respectExpireTimeout = false;
             lowUrgencyDuration = 3;
-            normalUrgencyDuration = 8;
-            criticalUrgencyDuration = 15;
+            normalUrgencyDuration = 3;
+            criticalUrgencyDuration = 3;
             enableKeyboardLayoutToast = true;
           };
           osd = {
