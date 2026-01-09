@@ -22,11 +22,8 @@
   environment.systemPackages = with pkgs; [
     vim
     busybox
+    android-tools
   ];
-
-  programs = {
-    adb.enable = true;
-  };
 
   # --- User account ---
   users.users.lux = {
