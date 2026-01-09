@@ -17,6 +17,7 @@
         # "--enable-zero-copy"
         "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled" # google nuked it in fucking 139
         "--disable-features=GlobalShortcutsPortal"
+        "--password-store=gnome-libsecret"
       ];
 
     })
@@ -39,7 +40,7 @@
     };
     extensions = [
       "hlepfoohegkhhmjieoechaddaejaokhf" # refined github
-      # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
     ];
