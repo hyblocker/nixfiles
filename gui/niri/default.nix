@@ -35,7 +35,7 @@
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
   programs.seahorse.enable = true;
-  programs.ssh.askPassword = lib.mkForce "${pkgs.gnome-flashb/ack}/libexec/seahorse/ssh-askpass";
+  programs.ssh.askPassword = lib.mkForce "${pkgs.gnome-flashback}/libexec/seahorse/ssh-askpass";
 
   # The default /etc/pam.d/sddm-autologin doesn't invoke auth pam_kwallet5.so
   # Thus we need to manually do it with auth include sddm
