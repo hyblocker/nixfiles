@@ -1,7 +1,6 @@
 {
-  lib,
   pkgs ? import <nixpkgs> { },
-  refreshRate ? 60, # Default value is 60Hz
+  refreshRate ? 60, # in Hz
 }:
 
 let
@@ -74,7 +73,7 @@ let
       ln -s ${part1} archive_stage/${part1.name}
       ln -s ${part2} archive_stage/${part2.name}
 
-      echo "Extracting 20GB+ game data..."
+      echo "Extracting game data..."
 
       7z x archive_stage/${part1.name} -oextract_stage -y > /dev/null &
       Z_PID=$!
@@ -94,10 +93,8 @@ let
       TOPLEVEL=$(find extract_stage -mindepth 1 -maxdepth 1 | wc -l)
       if [ "$TOPLEVEL" -eq 1 ] && [ -d "$(find extract_stage -mindepth 1 -maxdepth 1)" ]; then
         TOPDIR=$(find extract_stage -mindepth 1 -maxdepth 1)
-        echo "Flattening $TOPDIR"
         cp -a "$TOPDIR"/. "$out"/
       else
-        echo "Archive already flat"
         cp -a extract_stage/. "$out"/
       fi
     '';
@@ -149,9 +146,6 @@ pkgs.buildFHSEnv {
   '';
 
   runScript = pkgs.writeShellScript "sdvx-launcher" ''
-    # for better compat temporarily set locale to japan
-    export LANG="ja_JP.UTF-8"
-    export LC_ALL="ja_JP.UTF-8"
     export SDVX_HOME="$HOME/.local/share/sdvx-arcade"
     export SPICECFGPATH="$SDVX_HOME/spicetools.xml"
     export PULSE_LATENCY_MSEC=37
@@ -207,10 +201,6 @@ pkgs.buildFHSEnv {
       echo "Installing fonts..."
       winetricks -q cjkfonts
 
-      # wine64 reg add 'HKCU\Software\Wine\DllOverrides' /v dxgi /d native /f > /dev/null 2>&1
-      # wine64 reg add 'HKCU\Software\Wine\DllOverrides' /v d3d9 /d native /f > /dev/null 2>&1
-      # wine64 reg add 'HKCU\Software\Wine\DllOverrides' /v d3d11 /d native /f > /dev/null 2>&1
-
       # setup WineASIO
       WINEASIO64_SO="${pkgs.wineasio}/lib/wine/x86_64-unix/wineasio64.dll.so"
       DEST64="$WINEPREFIX/drive_c/windows/system32/wineasio64.dll"
@@ -221,39 +211,29 @@ pkgs.buildFHSEnv {
       DEST32="$WINEPREFIX/drive_c/windows/syswow64/wineasio32.dll"
       ln -sf "$WINEASIO32_SO" "$DEST32"
       wine regsvr32 /s "C:\windows\syswow64\wineasio32.dll"
-
-      # fonts required for Live2D
-      # wine64 reg add "HKCU\Software\Wine\Fonts\Replacements" /v "MS Gothic" /d "IPAGothic" /f
-      # wine64 reg add "HKCU\Software\Wine\Fonts\Replacements" /v "MS PGothic" /d "IPAPGothic" /f
-      # wine64 reg add "HKCU\Software\Wine\Fonts\Replacements" /v "MS UI Gothic" /d "IPAGothic" /f
     fi
 
-    # script may invoke either asphyxia, spicecfg or the game
+    # script may invoke either asphyxia, spicecfg, wineasio settings (for latency tuning) or the game
     if [[ "$1" == "--server" ]]; then
       echo "Starting Asphyxia Core only..."
       cd "$SDVX_HOME/asphyxia"
       ./asphyxia-core
-    elif [[ "$1" == "--winecfg" ]]; then
-      echo "Starting winecfg..."
-      cd "$SDVX_HOME/game"
-      pw-jack winecfg
-    elif [[ "$1" == "--regedit" ]]; then
-      echo "Starting regedit..."
-      cd "$SDVX_HOME/game"
-      wine64 regedit
-    elif [[ "$1" == "--winetricks" ]]; then
-      echo "Starting winetricks..."
-      cd "$SDVX_HOME/game"
-      winetricks dlls list
     elif [[ "$1" == "--wineasio" ]]; then
       echo "Starting wineasio-settings..."
       cd "$SDVX_HOME/game"
       pw-jack wineasio-settings
     elif [[ "$1" == "--config" ]]; then
+      # for better compat temporarily set locale to japan
+      export LANG="ja_JP.UTF-8"
+      export LC_ALL="ja_JP.UTF-8"
+
       echo "Starting Spice Configuration..."
       cd "$SDVX_HOME/game"
       wine64 spicecfg.exe -cfgpath $SPICECFGPATH
     else
+      # for better compat temporarily set locale to japan
+      export LANG="ja_JP.UTF-8"
+      export LC_ALL="ja_JP.UTF-8"
       # Launch game
       MONITOR=$(niri msg -j outputs | jq -r 'keys | .[0]')
       ORIG_WIDTH=$(niri msg -j outputs | jq -r ".\"$MONITOR\".modes[0].width")
