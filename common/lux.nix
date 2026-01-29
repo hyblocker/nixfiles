@@ -44,6 +44,17 @@
   # yubikey udev rules
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
+  # sdvx requires 44100Hz sample rate
+  services.pipewire = {
+    enable = true;
+    extraConfig.pipewire."92-samplerates" = {
+      "context.properties" = {
+        "default.clock.rate" = 44100;
+        "default.clock.allowed-rates" = [ 44100 ];
+      };
+    };
+  };
+
   home-manager.users.lux =
     { pkgs, ... }:
     {
@@ -62,6 +73,8 @@
         hatter-icons
         papirus-icon-theme
         fluxpose
+
+        # hytale-launcher # pending https://github.com/NixOS/nixpkgs/pull/479368/
       ];
     };
 
