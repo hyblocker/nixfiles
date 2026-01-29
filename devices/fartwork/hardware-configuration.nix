@@ -23,9 +23,11 @@
     "sd_mod"
   ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/24d7bb05-1839-4745-a379-c7144a58ca1f";

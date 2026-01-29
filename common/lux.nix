@@ -39,6 +39,10 @@
       # WE GAMING
       unnamed-sdvx-clone
       parsec-bin
+
+      # this will be so fucking funny if it worked
+      sdvx6
+      qjackctl
     ];
   };
 
@@ -47,7 +51,6 @@
 
   # sdvx requires 44100Hz sample rate
   services.pipewire = {
-    enable = true;
     extraConfig.pipewire."92-samplerates" = {
       "context.properties" = {
         "default.clock.rate" = 44100;
@@ -66,7 +69,9 @@
         mpv
         nerd-fonts._0xproto
         nerd-fonts.droid-sans-mono
+        noto-fonts
         noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
         noto-fonts-color-emoji
         cascadia-code
         mission-center

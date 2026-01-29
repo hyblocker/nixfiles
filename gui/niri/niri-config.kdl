@@ -323,6 +323,23 @@ window-rule {
     default-column-width {}
 }
 
+// SDVX is a fullscreen borderless game
+window-rule {
+    match app-id="spice64.exe"
+    match title="SOUND VOLTEX EXCEED GEAR"
+    default-window-height { fixed 1080; }
+    default-column-width { fixed 1920; }
+    draw-border-with-background false
+    geometry-corner-radius 0
+    open-fullscreen true
+    open-floating true
+}
+
+// disable middle click paste
+clipboard {
+    disable-primary
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:

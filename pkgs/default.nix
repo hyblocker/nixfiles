@@ -8,4 +8,5 @@
   # example = pkgs.callPackage ./example { };
   hatter-icons = pkgs.callPackage ./icons/hatter-icons.nix { };
   fluxpose = pkgs.callPackage ./fluxpose { };
+  sdvx6 = pkgs.callPackage ./sdvx6 { };
 }

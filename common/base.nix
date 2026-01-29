@@ -26,6 +26,7 @@
   ];
 
   # --- User account ---
+  users.groups.realtime = { };
   users.users.lux = {
     # note: set a password with 'passwd'
     isNormalUser = true;
@@ -33,11 +34,32 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "video"
+      "render"
+      "realtime"
+      "audio"
     ];
   };
 
+  # for audio shit (jack / ASIO)
+  security.pam.loginLimits = [
+    {
+      domain = "@audio";
+      item = "memlock";
+      type = "-";
+      value = "unlimited";
+    }
+    {
+      domain = "@audio";
+      item = "rtprio";
+      type = "-";
+      value = "99";
+    }
+  ];
+
   # --- hardware acceleration ---
   hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   # --- locale / timezone ---
   time.timeZone = "Europe/Malta";
