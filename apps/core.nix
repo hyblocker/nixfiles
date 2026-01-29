@@ -21,9 +21,13 @@
           "x-scheme-handler/unknown" = "chromium-browser.desktop";
 
           "application/zip" = "peazip.desktop";
+          "application/x-zip" = "peazip.desktop";
+          "application/x-zip-compressed" = "peazip.desktop";
           "application/x-7z-compressed" = "peazip.desktop";
           "application/x-rar" = "peazip.desktop";
           "application/x-tar" = "peazip.desktop";
+          "application/x-bzip2" = "peazip.desktop";
+          "application/x-gzip" = "peazip.desktop";
         };
       };
 
