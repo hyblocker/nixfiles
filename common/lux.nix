@@ -31,6 +31,7 @@
       file
       nmap
       htop
+      p7zip
 
       ffmpeg
       yt-dlp
