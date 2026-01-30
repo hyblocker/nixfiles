@@ -355,6 +355,12 @@ window-rule {
     open-floating true
 }
 
+// Steam notifications are annoying in the middle of my screen
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
