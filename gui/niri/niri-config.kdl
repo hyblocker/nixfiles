@@ -325,10 +325,16 @@ window-rule {
 
 // SDVX is a fullscreen borderless game
 window-rule {
+    match title="SOUND VOLTEX EXCEED GEAR - Main Screen"
     match app-id="spice64.exe"
-    match title="SOUND VOLTEX EXCEED GEAR"
-    default-window-height { fixed 1080; }
-    default-column-width { fixed 1920; }
+    
+    // 1080p -> minimum res
+    // default-window-height { fixed 1080; }
+    // default-column-width { fixed 1920; }
+
+    // for 2256x1504 res (framework 13")
+    default-window-height { fixed 1269; }
+    default-column-width { fixed 2256; }
     draw-border-with-background false
     geometry-corner-radius 0
     open-fullscreen true

@@ -7,6 +7,9 @@
 }:
 
 {
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 9093 ];
+
   nix.settings.trusted-users = [ "@wheel" ];
 
   # Define a user account. Don't forget to set a password with 'passwd'.

@@ -258,25 +258,6 @@ pkgs.buildFHSEnv {
       # pipe output into iconv as the game dumps CP932 (win32 Shift-JIS) to make the output utf8 and readable in terminal
       pw-jack wine64 spice64.exe -cfgpath $SPICECFGPATH 2>&1 | iconv -f cp932 -t utf-8 -c &
       WINE_PID=$!
-
-      # tell niri sdvx needs fullscreen
-      echo "Waiting for game window to map..."
-      MAX_RETRIES=30
-      COUNT=0
-      while [ $COUNT -lt $MAX_RETRIES ]; do
-          GAME_WINDOW_ID=$(niri msg -j windows | jq '.[] | select(.app_id == "spice64.exe") | .id' 2>/dev/null)
-
-          if [ -n "$GAME_WINDOW_ID" ]; then
-              echo "Found game window (ID: $GAME_WINDOW_ID). Forcing fullscreen..."
-              niri msg action focus-window --id "$GAME_WINDOW_ID"
-              niri msg action fullscreen-window
-              break
-          fi
-
-          sleep 1
-          ((COUNT++))
-      done
-
       wait $WINE_PID
 
       # game closed, kill asphyxia and restore displays
