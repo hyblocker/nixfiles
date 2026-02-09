@@ -20,6 +20,9 @@
           "x-scheme-handler/about" = "chromium-browser.desktop";
           "x-scheme-handler/unknown" = "chromium-browser.desktop";
 
+          # otherwise this defaults to fucking kate???
+          "inode/directory" = "org.kde.dolphin.desktop";
+
           "application/zip" = "peazip.desktop";
           "application/x-zip" = "peazip.desktop";
           "application/x-zip-compressed" = "peazip.desktop";
