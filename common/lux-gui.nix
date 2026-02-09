@@ -19,6 +19,8 @@
         nerd-fonts.droid-sans-mono
         cascadia-code
         signal-desktop
+        blender
+        streamcontroller
       ];
       fonts.fontconfig.enable = true;
     };
