@@ -325,8 +325,7 @@ window-rule {
 
 // SDVX is a fullscreen borderless game
 window-rule {
-    match title="SOUND VOLTEX EXCEED GEAR - Main Screen"
-    match app-id="spice64.exe"
+    match app-id="spice64.exe" title=r#"SOUND VOLTEX EXCEED GEAR"
     
     // 1080p -> minimum res
     // default-window-height { fixed 1080; }
@@ -359,6 +358,7 @@ window-rule {
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
 }
 
 // Example: block out two password managers from screen capture.
