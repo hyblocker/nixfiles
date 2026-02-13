@@ -51,6 +51,7 @@
       pkgs-stable = import nixpkgs-stable {
         inherit system;
         overlays = [ overlays.additions ];
+        config.allowUnfree = true;
       };
       pkgs-bleeding = import nixpkgs-bleeding {
         inherit system;

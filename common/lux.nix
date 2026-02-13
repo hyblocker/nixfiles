@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   inputs,
   lib,
   ...
@@ -44,7 +45,7 @@
       parsec-bin
 
       # this will be so fucking funny if it worked
-      sdvx7
+      pkgs-stable.sdvx7
       qjackctl
     ];
   };
