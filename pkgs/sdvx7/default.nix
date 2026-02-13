@@ -4,54 +4,48 @@
 }:
 
 let
-  pname = "sdvx6";
-  version = "2025120900";
+  pname = "sdvx7";
+  version = "2025122600";
 
   desktopItems = [
     (pkgs.makeDesktopItem {
-      name = "sdvx6";
-      desktopName = "Sound Voltex EXCEED GEAR";
-      exec = "sdvx6";
-      icon = "controller";
+      name = "sdvx7";
+      desktopName = "SOUND VOLTEX ∇ Nabla";
+      exec = "sdvx7";
+      icon = "sdvx7";
       categories = [ "Game" ];
     })
     (pkgs.makeDesktopItem {
-      name = "sdvx6-config";
+      name = "sdvx7-config";
       desktopName = "SDVX Config (SpiceCfg)";
-      exec = "sdvx6 --config";
+      exec = "sdvx7 --config";
       icon = "settings";
       categories = [ "Settings" ];
     })
     (pkgs.makeDesktopItem {
-      name = "sdvx6-asphyxia";
+      name = "sdvx7-asphyxia";
       desktopName = "Asphyxia Core (SDVX Server)";
-      exec = "sdvx6 --server";
+      exec = "sdvx7 --server";
       icon = "network-server";
       categories = [ "Utility" ];
     })
   ];
 
-  part1 = pkgs.requireFile {
-    name = "KFC-2025120900.7z.001";
-    sha256 = "sha256-RYB7zBqKKtATKNrzeU/WZxY1gx3kRZCEdizTjbvJZU8=";
-    message = "Add part 1: nix-store --add-fixed sha256 KFC-2025120900.7z.001";
-  };
-
-  part2 = pkgs.requireFile {
-    name = "KFC-2025120900.7z.002";
-    sha256 = "sha256-Bak4ak4S5St0xeAEI/j3SlUNkeiBTF8iYDaphrcUE9A=";
-    message = "Add part 2: nix-store --add-fixed sha256 KFC-2025120900.7z.002";
+  gameAio = pkgs.requireFile {
+    name = "KFC-2025122600.rar";
+    sha256 = "sha256-Hu/2LoWXJs+8pXZGBluhO3kqExbUHK5N0Wi4c9lK3ow=";
+    message = "Add all in one archive: nix-store --add-fixed sha256 KFC-2025122600.rar";
   };
 
   asphyxiaSrc = pkgs.fetchzip {
-    url = "https://github.com/asphyxia-core/asphyxia-core.github.io/releases/download/v1.50d/asphyxia-core-linux-x64.zip";
-    sha256 = "sha256-w6Ft8zyuTXU8eW7w1QrzO+O7vaTVe3iqtfKF4uThmlY=";
+    url = "https://github.com/asphyxia-core/core/releases/download/v1.60a/asphyxia-core-linux-x64.zip";
+    sha256 = "sha256-JAfiTWJwkRGH88sONxwk68wWLN4nZwa4UnsGnC0aj84=";
     stripRoot = false;
   };
 
   kfcPlugin = pkgs.fetchzip {
-    url = "https://github.com/22vv0/asphyxia_plugins/releases/download/kfc-6.2.3/kfc-6.2.3.zip";
-    sha256 = "sha256-sr7AxRf+qz32vkrqd8BN+dIZYd9Dl+JbSuprnme+Jp0=";
+    url = "https://github.com/22vv0/asphyxia_plugins/releases/download/kfc-7.0.0/kfc-7.0.0.zip";
+    sha256 = "sha256-qFX3GRchoxjgChkDnDQXHqjRqvpI5UNude51uE/FBaY=";
     stripRoot = false;
   };
 
@@ -64,27 +58,24 @@ let
   gameData = pkgs.stdenv.mkDerivation {
     name = "${pname}-data-${version}";
     srcs = [
-      part1
-      part2
+      gameAio
     ];
-    nativeBuildInputs = [ pkgs.p7zip ];
+    nativeBuildInputs = [ pkgs.unrar ];
     unpackPhase = ''
-      mkdir archive_stage extract_stage
-      ln -s ${part1} archive_stage/${part1.name}
-      ln -s ${part2} archive_stage/${part2.name}
+      mkdir extract_stage
 
       echo "Extracting game data..."
 
-      7z x archive_stage/${part1.name} -oextract_stage -y > /dev/null &
-      Z_PID=$!
+      unrar x ${gameAio} extract_stage/ -idq -o+ &
+      U_PID=$!
 
-      while kill -0 $Z_PID 2>/dev/null; do
+      while kill -0 $U_PID 2>/dev/null; do
         SIZE=$(du -sh extract_stage | cut -f1)
         echo "Extracting game data, extracted $SIZE"
         sleep 5
       done
 
-      wait $Z_PID
+      wait $U_PID
       echo "Extraction complete"
 
       mkdir -p $out
@@ -120,10 +111,10 @@ pkgs.buildFHSEnv {
       libGL
       pipewire.jack
       alsa-lib
-      xorg.libX11
-      xorg.libXext
-      xorg.libXrender
-      xorg.lndir
+      libx11
+      libxext
+      libxrender
+      lndir
       fontconfig
       noto-fonts-cjk-sans
       ipafont
@@ -143,6 +134,10 @@ pkgs.buildFHSEnv {
     ${pkgs.lib.concatMapStrings (item: ''
       cp ${item}/share/applications/* $out/share/applications/
     '') desktopItems}
+
+    # install icon
+    mkdir -p $out/share/icons/hicolor/512x512/apps
+    cp ${./game-icon.png} $out/share/icons/hicolor/512x512/apps/sdvx7.png
   '';
 
   runScript = pkgs.writeShellScript "sdvx-launcher" ''
@@ -181,9 +176,9 @@ pkgs.buildFHSEnv {
       echo "Installing KFC plugin..."
       chown -R $USER:$USER "$SDVX_HOME/asphyxia/plugins"
       chmod -R u+rwX "$SDVX_HOME/asphyxia/plugins"
+      mkdir -p "$SDVX_HOME/asphyxia/plugins/sdvx@asphyxia"
       cp -a "${kfcPlugin}/." "$SDVX_HOME/asphyxia/plugins/sdvx@asphyxia/"
       chmod -R u+rwX "$SDVX_HOME/asphyxia/plugins/sdvx@asphyxia"
-      mkdir -p "$SDVX_HOME/asphyxia/plugins/sdvx@asphyxia"
     fi
 
     if [ ! -d "$WINEPREFIX" ]; then
@@ -253,7 +248,7 @@ pkgs.buildFHSEnv {
       ASPHYXIA_PID=$!
       sleep 5
 
-      echo "Launching SDVX EXCEED GEAR..."
+      echo "Launching SOUND VOLTEX ∇ Nabla..."
       cd "$SDVX_HOME/game"
       # pipe output into iconv as the game dumps CP932 (win32 Shift-JIS) to make the output utf8 and readable in terminal
       pw-jack wine64 spice64.exe -cfgpath $SPICECFGPATH 2>&1 | iconv -f cp932 -t utf-8 -c &

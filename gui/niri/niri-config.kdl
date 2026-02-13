@@ -325,7 +325,7 @@ window-rule {
 
 // SDVX is a fullscreen borderless game
 window-rule {
-    match app-id="spice64.exe" title=r#"SOUND VOLTEX EXCEED GEAR"
+    match app-id="spice64.exe" title="^SOUND VOLTEX.*"
     
     // 1080p -> minimum res
     // default-window-height { fixed 1080; }

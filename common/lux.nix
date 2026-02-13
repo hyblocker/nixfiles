@@ -44,7 +44,7 @@
       parsec-bin
 
       # this will be so fucking funny if it worked
-      sdvx6
+      sdvx7
       qjackctl
     ];
   };
