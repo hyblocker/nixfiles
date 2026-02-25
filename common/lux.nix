@@ -61,6 +61,15 @@
         "default.clock.allowed-rates" = [ 44100 ];
       };
     };
+    # low latency
+    extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "default.clock.rate" = 44100;
+        "default.clock.quantum" = 32;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 32;
+      };
+    };
   };
 
   home-manager.users.lux =
