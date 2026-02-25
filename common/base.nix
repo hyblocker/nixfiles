@@ -100,4 +100,17 @@
   };
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
   nix.settings.auto-optimise-store = true;
+
+  # --- Home Manager ---
+  home-manager.users.lux =
+    { pkgs, ... }:
+    {
+      home.username = "lux";
+      home.homeDirectory = "/home/lux";
+      home.stateVersion = "25.11";
+      programs.home-manager.enable = true;
+    };
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "bak";
 }
