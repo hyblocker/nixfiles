@@ -28,7 +28,8 @@
   # --- User account ---
   users.groups.realtime = { };
   users.users.lux = {
-    # note: set a password with 'passwd'
+    initialPassword = "password";
+    # note: set a password with 'passwd' ; the above is the initial one on system creation
     isNormalUser = true;
     description = "lux";
     extraGroups = [
