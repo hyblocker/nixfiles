@@ -96,6 +96,10 @@
         config = ''
           ${lib.fileContents ./niri-config.kdl}
         '';
+        settings.xwayland-satellite = {
+          enable = true;
+          path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
+        };
       };
     };
 }
