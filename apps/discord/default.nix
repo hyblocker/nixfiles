@@ -14,6 +14,8 @@
         inputs.nixcord.homeModules.nixcord
       ];
 
+      # https://github.com/FlameFlag/nixcord/blob/63871baa87897231803d617eab908261caa5907c/modules/plugins/shared.nix
+
       programs.nixcord = {
         enable = true;
         discord.enable = false;
@@ -54,9 +56,10 @@
             webKeybinds.enable = true;
           };
         };
-        quickCss = ''
-          ${lib.fileContents ./vencord.css}
-        ''; # import for css linting etc to be avail lol
+        # @TODO: broken, need to fix
+        # quickCss = ''
+        #   ${lib.fileContents ./vencord.css}
+        # ''; # import for css linting etc to be avail lol
       };
     };
 
