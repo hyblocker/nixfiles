@@ -72,6 +72,12 @@
     };
   };
 
+  hardware.bluetooth.settings = {
+    General = {
+      Experimental = true; # battery life
+    };
+  };
+
   home-manager.users.lux =
     { pkgs, ... }:
     {
