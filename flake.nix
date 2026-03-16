@@ -110,9 +110,8 @@
           }
           ./devices/chungus/configuration.nix
           ./devices/chungus/hardware-configuration.nix
-          nixos-hardware.nixosModules.framework-13-7040-amd
         ]
-        ++ self.guiModules;
+        ++ self.devModules;
       };
     };
 }
