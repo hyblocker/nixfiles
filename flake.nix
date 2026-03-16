@@ -69,13 +69,17 @@
       ];
 
       devModules = [
-        ./common/lux-gui.nix
         ./common/dev.nix
         ./apps/all.nix
+      ]
+      ++ self.baseModules;
+
+      guiModules = [
+        ./common/lux-gui.nix
         ./gui/kde-plasma.nix
         ./gui/niri
       ]
-      ++ self.baseModules;
+      ++ self.devModules;
 
       nixosConfigurations.fartwork = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs pkgs-stable pkgs-bleeding; };
@@ -91,7 +95,24 @@
           ./devices/fartwork/hardware-configuration.nix
           nixos-hardware.nixosModules.framework-13-7040-amd
         ]
-        ++ self.devModules;
+        ++ self.guiModules;
+      };
+      
+      nixosConfigurations.chungus = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs pkgs-stable pkgs-bleeding; };
+        system = "x86_64-linux";
+        modules = [
+          {
+            _module.args = { inherit inputs; };
+          }
+          {
+            nixpkgs.overlays = [ overlays.additions ];
+          }
+          ./devices/chungus/configuration.nix
+          ./devices/chungus/hardware-configuration.nix
+          nixos-hardware.nixosModules.framework-13-7040-amd
+        ]
+        ++ self.guiModules;
       };
     };
 }
