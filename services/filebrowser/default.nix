@@ -10,5 +10,6 @@
   services.filebrowser = {
     enable = true;
     openFirewall = true;
+    settings.port = 8080;
   };
 }

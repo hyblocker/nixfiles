@@ -14,4 +14,5 @@
     disableGettingStartedOverride = true;
     port = 4444;
   };
+  networking.firewall.allowedTCPPorts = [ 4444 ];
 }

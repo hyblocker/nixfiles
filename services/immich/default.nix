@@ -9,9 +9,7 @@
 {
   services.immich = {
     enable = true;
-    disableTelemetry = true;
-    disableUpdateCheck = true;
-    disableGettingStartedOverride = true;
+    openFirewall = true;
     port = 2283;
   };
 }
