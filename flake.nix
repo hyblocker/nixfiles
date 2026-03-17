@@ -114,6 +114,7 @@
           }
           ./devices/chungus/configuration.nix
           ./devices/chungus/hardware-configuration.nix
+          ./devices/chungus/services.nix
         ]
         ++ self.devModules
         ++ self.serverModules;
