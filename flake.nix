@@ -80,6 +80,10 @@
         ./gui/niri
       ]
       ++ self.devModules;
+      
+      serverModules = [
+        ./common/server.nix
+      ];
 
       nixosConfigurations.fartwork = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs pkgs-stable pkgs-bleeding; };
@@ -111,7 +115,8 @@
           ./devices/chungus/configuration.nix
           ./devices/chungus/hardware-configuration.nix
         ]
-        ++ self.devModules;
+        ++ self.devModules
+        ++ self.serverModules;
       };
     };
 }
