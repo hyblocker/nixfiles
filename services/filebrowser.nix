@@ -20,7 +20,7 @@ in
   lux.reverseProxy = {
     enable = true;
 
-    proxies.files = {
+    services.files = {
       port = filebrowser_port;
       path = "/files";
     };

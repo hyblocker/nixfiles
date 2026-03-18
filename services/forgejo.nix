@@ -19,9 +19,8 @@ in
   lux.reverseProxy = {
     enable = true;
 
-    proxies.git = {
+    services.git = {
       port = forgejo_port;
-      path = "/git";
     };
   };
 }

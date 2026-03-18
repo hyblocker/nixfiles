@@ -13,9 +13,8 @@ in
   lux.reverseProxy = {
     enable = true;
 
-    proxies.immich = {
+    services.immich = {
       port = immich_port;
-      path = "/immich";
     };
   };
 }

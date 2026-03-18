@@ -24,9 +24,8 @@ in
   lux.reverseProxy = {
     enable = true;
 
-    proxies.code = {
+    services.code = {
       port = code_server_port;
-      path = "/code";
     };
   };
 }
