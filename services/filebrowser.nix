@@ -9,6 +9,7 @@
 let
   hostname = config.networking.hostName;
   domain = "${hostname}.local";
+in
 {
   services.filebrowser = {
     enable = true;

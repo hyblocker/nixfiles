@@ -11,6 +11,7 @@ let
   hostname = config.networking.hostName;
   domain = "${hostname}.local";
   immich_port = 2283;
+in
 {
   services.immich = {
     enable = true;
