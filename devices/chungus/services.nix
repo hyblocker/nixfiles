@@ -6,8 +6,9 @@
 
 {
   imports = [
-    ../../services/filebrowser
-    ../../services/immich
-    ../../services/code-server
+    ../../services/homelab_utils.nix
+    ../../services/filebrowser.nix
+    ../../services/immich.nix
+    ../../services/code-server.nix
   ];
 }
