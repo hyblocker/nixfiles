@@ -11,5 +11,6 @@
     ../../services/filebrowser.nix
     ../../services/immich.nix
     ../../services/code-server.nix
+    ../../services/forgejo.nix
   ];
 }
