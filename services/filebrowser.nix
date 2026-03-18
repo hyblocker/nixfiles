@@ -7,25 +7,22 @@
 }:
 
 let
-  hostname = config.networking.hostName;
-  domain = "${hostname}.local";
+  filebrowser_port = 8080;
 in
 {
   services.filebrowser = {
     enable = true;
     openFirewall = true;
     settings.address = "0.0.0.0";
-    settings.port = 8080;
+    settings.port = filebrowser_port;
   };
 
-  # reverse proxy
-  services.nginx.virtualHosts."${domain}".locations."/files" = {
-    proxyPass = "http://127.0.0.1:8080";
-    proxyWebsockets = true;
-    extraConfig = ''
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection "upgrade";
-      proxy_set_header Host $host;
-    '';
+  lux.reverseProxy = {
+    enable = true;
+
+    proxies.files = {
+      port = filebrowser_port;
+      path = "/files";
+    };
   };
 }

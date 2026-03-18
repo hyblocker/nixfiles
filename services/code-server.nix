@@ -7,8 +7,7 @@
 }:
 
 let
-  hostname = config.networking.hostName;
-  domain = "${hostname}.local";
+  code_server_port = 4444;
 in
 {
   services.code-server = {
@@ -18,18 +17,16 @@ in
     disableGettingStartedOverride = true;
     extraGroups = [ "users" ];
     host = "0.0.0.0";
-    port = 4444;
+    port = code_server_port;
   };
-  networking.firewall.allowedTCPPorts = [ 4444 ];
+  networking.firewall.allowedTCPPorts = [ code_server_port ];
 
-  # reverse proxy
-  services.nginx.virtualHosts."${domain}".locations."/code" = {
-    proxyPass = "http://127.0.0.1:4444";
-    proxyWebsockets = true;
-    extraConfig = ''
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection "upgrade";
-      proxy_set_header Host $host;
-    '';
+  lux.reverseProxy = {
+    enable = true;
+
+    proxies.code = {
+      port = code_server_port;
+      path = "/code";
+    };
   };
 }
