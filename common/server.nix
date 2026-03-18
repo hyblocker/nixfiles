@@ -9,15 +9,6 @@
 let
   hostname = config.networking.hostName;
   domain = "${hostname}.local";
-
-  # declaratively generate ssl certs
-  sslCert = pkgs.runCommand "self-signed-cert-${hostname}" { buildInputs = [ pkgs.openssl ]; } ''
-    mkdir -p $out
-    openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
-      -keyout $out/server.key \
-      -out $out/server.crt \
-      -subj "/CN=${domain}"
-  '';
 in
 {
   # disable sleeping when closing lid
@@ -55,9 +46,9 @@ in
   services.nginx = {
     enable = true;
     virtualHosts."${domain}" = {
-      forceSSL = true;
-      sslCertificate = "${sslCert}/server.crt";
-      sslCertificateKey = "${sslCert}/server.key";
+      addSSL = false;
+      forceSSL = false;
+      enableACME = false;
     };
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
