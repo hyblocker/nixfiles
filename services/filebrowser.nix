@@ -22,7 +22,6 @@ in
 
     services.files = {
       port = filebrowser_port;
-      path = "/files";
     };
   };
 }
