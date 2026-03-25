@@ -9,6 +9,7 @@
 
 {
   networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
   networking.firewall.allowedTCPPorts = [ 9093 ];
 
   nix.settings.trusted-users = [ "@wheel" ];
