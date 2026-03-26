@@ -3,7 +3,6 @@
 {
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
 
     settings = {
@@ -15,6 +14,7 @@
         "logging" = "systemd";
         "socket options" = "TCP_NODELAY IPTOS_LOWDELAY";
         "use sendfile" = true;
+        "security" = "user";
         
         # auth / encryption
         "server min protocol" = "SMB3";
