@@ -18,6 +18,8 @@
   users.users.lux = {
     packages = with pkgs; [
       # cli
+      age
+      sops
       wget
       nil
       nixfmt
@@ -67,4 +69,15 @@
 
   # Enable bitmap font rendering (icons aka emojis)
   fonts.fontconfig.useEmbeddedBitmaps = true;
+
+  # sops
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  
+  sops.age.keyFile = "/home/lux/.config/sops/age/keys.txt";
+
+  sops.secrets."forgejo-runner-token" = {
+    owner = "forgejo-runner";
+    group = "forgejo-runner";
+  };
 }

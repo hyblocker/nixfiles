@@ -22,6 +22,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -37,8 +41,10 @@
       nixpkgs-bleeding,
       home-manager,
       nixcord,
+      noctalia,
       nixos-hardware,
       niri,
+      sops-nix,
       ...
     }:
     let
@@ -66,6 +72,7 @@
         ./common/lux.nix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+        sops-nix.nixosModules.sops
       ];
 
       devModules = [

@@ -45,7 +45,6 @@
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/4ee76781-7b3b-4aca-bfe1-a48d04da879a";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ]; # not required for boot
   };
 
   swapDevices = [ ];
