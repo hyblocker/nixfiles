@@ -77,7 +77,7 @@
   sops.age.keyFile = "/home/lux/.config/sops/age/keys.txt";
 
   sops.secrets."forgejo-runner-token" = {
-    owner = "forgejo-runner";
-    group = "forgejo-runner";
+    owner = "gitea-runner";
+    group = "gitea-runner";
   };
 }

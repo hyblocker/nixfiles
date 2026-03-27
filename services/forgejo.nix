@@ -40,23 +40,44 @@ in
     };
   };
 
-  users.users.forgejo-runner = {
+  users.users.gitea-runner = {
     isSystemUser = true;
-    group = "forgejo-runner";
+    group = "gitea-runner";
     extraGroups = [ "docker" ];
   };
-  users.groups.forgejo-runner = {};
+  users.groups.gitea-runner = {};
+
+  nix.settings.allowed-users = [ "gitea-runner" ];
+  nix.settings.trusted-users = [ "gitea-runner" ];
 
   # git runners
   services.gitea-actions-runner = {
     package = pkgs.forgejo-runner;
     instances.default = {
       enable = true;
-      name = "monolith";
-      url = "https://${srv.DOMAIN}/";
+      name = "${hostname}";
+      url = "http://localhost:${toString forgejo_port}";
       # Obtaining the path to the runner token file may differ
       # tokenFile should be in format TOKEN=<secret>, since it's EnvironmentFile for systemd
       tokenFile = config.sops.secrets."forgejo-runner-token".path;
+      hostPackages = with pkgs; [
+        bash
+        coreutils
+        curl
+        gawk
+        git
+        cmake
+        makeWrapper
+        pkg-config
+        gnumake
+        gcc
+        automake
+        autoconf
+        gnused
+        nodejs
+        wget
+        nix
+      ];
       labels = [
         "ubuntu-latest:docker://node:16-bullseye"
         "ubuntu-22.04:docker://node:16-bullseye"
@@ -64,7 +85,7 @@ in
         "ubuntu-18.04:docker://node:16-buster"
         "steam-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk"
         ## optionally provide native execution on the host:
-        # "native:host"
+        "native:host"
       ];
     };
   };
