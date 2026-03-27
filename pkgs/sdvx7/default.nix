@@ -159,7 +159,12 @@ pkgs.buildFHSEnv {
 
     # setup game shit
     mkdir -p "$SDVX_HOME/game/modules"
-    lndir -silent "${gameData}" "$SDVX_HOME/game"
+    CURRENT_LINK=$(readlink -f "$SDVX_HOME/game/modules/soundvoltex.dll" 2>/dev/null || echo "")
+    if [ "$CURRENT_LINK" != "${gameData}/modules/soundvoltex.dll" ]; then
+        echo "Game data is out of date. Updating symlinks..."
+        find "$SDVX_HOME/game" -type l -delete
+        lndir -silent "${gameData}" "$SDVX_HOME/game" > /dev/null 2>&1
+    fi
     cp -f "${spiceSrc}/extras/linux/spice64.exe" "$SDVX_HOME/game/"
     cp -f "${spiceSrc}/extras/linux/spicecfg.exe" "$SDVX_HOME/game/"
     cp -f "${spiceSrc}/stubs/64/"*.dll "$SDVX_HOME/game/modules/"
