@@ -46,6 +46,15 @@
         "default.clock.max-quantum" = 32;
       };
     };
+
+    # force disable hands free mode
+    wireplumber = {
+      configPackages = [
+        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
+          wireplumber.settings = { bluetooth.autoswitch-to-headset-profile = false }
+        '')
+      ];
+    };
   };
 
   home-manager.users.lux =
