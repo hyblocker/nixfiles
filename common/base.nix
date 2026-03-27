@@ -77,6 +77,19 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
+  # enable mDNS
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+    };
+  };
+
   # --- Nix ---
   nixpkgs = {
     config = {

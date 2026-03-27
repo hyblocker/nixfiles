@@ -29,19 +29,6 @@ in
     AllowSuspendThenHibernate=no
   '';
 
-  # enable mDNS
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-    };
-  };
-
   # enable nginx reverse proxy
   services.nginx = {
     enable = true;
