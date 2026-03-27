@@ -18,7 +18,7 @@ in
       ];
     };
   };
-  
+
   # allow dns queries
   networking.firewall.allowedUDPPorts = [ 53 ];
 }

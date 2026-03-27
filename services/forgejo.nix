@@ -45,7 +45,7 @@ in
     group = "gitea-runner";
     extraGroups = [ "docker" ];
   };
-  users.groups.gitea-runner = {};
+  users.groups.gitea-runner = { };
 
   nix.settings.allowed-users = [ "gitea-runner" ];
   nix.settings.trusted-users = [ "gitea-runner" ];

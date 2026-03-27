@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.samba = {
@@ -15,7 +20,7 @@
         "socket options" = "TCP_NODELAY IPTOS_LOWDELAY";
         "use sendfile" = true;
         "security" = "user";
-        
+
         # auth / encryption
         "server min protocol" = "SMB3";
         "server max protocol" = "SMB3";
@@ -29,11 +34,11 @@
       # 10TB hdd. eventually should move to a raid setup for redundancy but thats expensive
       "chudstore" = {
         "path" = "/mnt/storage";
-          "read only" = false;
-          "force create mode" = "0660";
-          "force directory mode" = "2770";
-          "force user" = "lux";
-          "force group" = "users";
+        "read only" = false;
+        "force create mode" = "0660";
+        "force directory mode" = "2770";
+        "force user" = "lux";
+        "force group" = "users";
       };
     };
   };

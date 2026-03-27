@@ -87,7 +87,7 @@
         ./gui/niri
       ]
       ++ self.devModules;
-      
+
       serverModules = [
         ./common/server.nix
       ];
@@ -108,7 +108,7 @@
         ]
         ++ self.guiModules;
       };
-      
+
       nixosConfigurations.chungus = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs pkgs-stable pkgs-bleeding; };
         system = "x86_64-linux";
