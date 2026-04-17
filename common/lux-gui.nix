@@ -19,6 +19,7 @@
       kdePackages.kate
       thunderbird-latest-unwrapped
       vrcx
+      scrcpy
 
       # WE GAMING
       unnamed-sdvx-clone
