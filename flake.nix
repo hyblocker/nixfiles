@@ -26,6 +26,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -45,6 +49,7 @@
       nixos-hardware,
       niri,
       sops-nix,
+      nix-vscode-extensions,
       ...
     }:
     let
@@ -100,7 +105,10 @@
             _module.args = { inherit inputs; };
           }
           {
-            nixpkgs.overlays = [ overlays.additions ];
+            nixpkgs.overlays = [
+              overlays.additions
+              inputs.nix-vscode-extensions.overlays.default
+            ];
           }
           ./devices/fartwork/configuration.nix
           ./devices/fartwork/hardware-configuration.nix
@@ -117,7 +125,10 @@
             _module.args = { inherit inputs; };
           }
           {
-            nixpkgs.overlays = [ overlays.additions ];
+            nixpkgs.overlays = [
+              overlays.additions
+              inputs.nix-vscode-extensions.overlays.default
+            ];
           }
           ./devices/chungus/configuration.nix
           ./devices/chungus/hardware-configuration.nix

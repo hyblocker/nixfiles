@@ -40,18 +40,24 @@
               workbench.settings.showAISearchToggle = false;
             };
 
-            extensions = with pkgs.vscode-extensions; [
-              eamodio.gitlens
-              jnoortheen.nix-ide
-              llvm-vs-code-extensions.vscode-clangd
-              ms-vscode.cmake-tools
-              ms-vscode.cpptools
-              ms-vscode.hexeditor
-              ms-vscode-remote.remote-ssh
-              redhat.vscode-xml
-              xaver.clang-format
-              yzhang.markdown-all-in-one
-            ];
+            extensions =
+              with pkgs.nix-vscode-extensions.vscode-marketplace;
+              [
+                eamodio.gitlens
+                jnoortheen.nix-ide
+                llvm-vs-code-extensions.vscode-clangd
+                ms-vscode.cmake-tools
+                ms-vscode.cpptools
+                ms-vscode.hexeditor
+                redhat.vscode-xml
+                xaver.clang-format
+                yzhang.markdown-all-in-one
+
+                kdl-org.kdl
+              ]
+              ++ (with pkgs.vscode-extensions; [
+                ms-vscode-remote.remote-ssh
+              ]);
           };
         };
       };
