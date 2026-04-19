@@ -65,22 +65,30 @@
   # Give SDDM permission to read LUKS password for autologin
   systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-shana
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      common = {
-        default = [
-          "shana"
-          "gtk"
-        ];
-      };
-      niri = {
-        "org.freedesktop.impl.portal.ScreenCast" = [ "shana" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "shana" ];
+  xdg = {
+    autostart.enable = true;
+    menus.enable = true;
+    mime.enable = true;
+    icons.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-shana
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = [
+            "shana"
+            "gtk"
+          ];
+        };
+        niri = {
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          "org.freedesktop.impl.portal.OpenURI" = [ "gtk" ];
+        };
       };
     };
   };
