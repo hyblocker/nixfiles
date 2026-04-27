@@ -13,6 +13,12 @@ in
     enable = true;
     openFirewall = true;
     port = immich_port;
+    host = "0.0.0.0";
+    mediaLocation = "/mnt/storage/immich";
+  };
+
+  services.redis.servers."" = {
+    enable = true;
   };
 
   lux.reverseProxy = {

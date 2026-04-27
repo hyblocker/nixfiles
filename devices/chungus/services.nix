@@ -18,7 +18,7 @@
 
     # web apps
     ../../services/filebrowser.nix
-    # ../../services/immich.nix
+    ../../services/immich.nix
     ../../services/code-server.nix
     ../../services/forgejo.nix
     # ../../services/jellyfin.nix
