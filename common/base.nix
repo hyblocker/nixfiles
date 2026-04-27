@@ -39,6 +39,7 @@
       "render"
       "realtime"
       "audio"
+      "docker"
     ];
   };
 

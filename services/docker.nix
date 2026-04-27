@@ -5,10 +5,6 @@
   lib,
   ...
 }:
-
-let
-  filebrowser_port = 8080;
-in
 {
   virtualisation.docker = {
     enable = true;
