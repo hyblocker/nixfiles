@@ -72,11 +72,4 @@
   # sops
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/lux/.config/sops/age/keys.txt";
-
-  sops.secrets."forgejo-runner-token" = {
-    owner = "gitea-runner";
-    group = "gitea-runner";
-  };
 }

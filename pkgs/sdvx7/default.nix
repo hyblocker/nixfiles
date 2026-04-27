@@ -150,6 +150,11 @@ pkgs.buildFHSEnv {
     export WINEDEBUG=-all
     export DXVK_STATE_CACHE=1
     export DXVK_LOG_LEVEL=none
+    export PIPEWIRE_RATE=1/44100
+    export PIPEWIRE_LATENCY="32/44100"
+    export PIPEWIRE_NODE="sdvx-game"
+    export PIPEWIRE_REMOTE="pipewire-0"
+    export PIPEWIRE_PROPS='{"node.force-rate":44100, "node.force-quantum":32}'
     export GST_PLUGIN_SYSTEM_PATH_1_0="${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0"
 
     if ! command -v wine64 >/dev/null; then
