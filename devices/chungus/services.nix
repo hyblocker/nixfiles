@@ -22,5 +22,7 @@
     ../../services/code-server.nix
     ../../services/forgejo.nix
     # ../../services/jellyfin.nix
+
+    ../../services/games
   ];
 }
