@@ -83,7 +83,7 @@ in
         "ubuntu-22.04:docker://node:16-bullseye"
         "ubuntu-20.04:docker://node:16-bullseye"
         "ubuntu-18.04:docker://node:16-buster"
-        "steam-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk"
+        "steam-sniper:docker://registry.gitlab.steamos.cloud/steamrt/sniper/sdk" # steam linux runtime for spacecal ci
         ## optionally provide native execution on the host:
         "native:host"
       ];

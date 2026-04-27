@@ -1,18 +1,23 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.lux.reverseProxy;
   hostname = config.networking.hostName;
-
   mkVHost = name: proxy: {
     locations."/" = {
-      proxyPass = "http://localhost:${toString proxy.port}";
+      proxyPass = "http://127.0.0.1:${toString proxy.port}";
       proxyWebsockets = proxy.websockets;
 
-      extraConfig = lib.optionalString proxy.websockets ''
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
+      extraConfig = ''
         proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+      '' + lib.optionalString proxy.websockets ''
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
       '';
     };
   };
@@ -54,12 +59,26 @@ in
       mkVHost name proxy
       // {
         serverName = "${name}.${cfg.domain}";
+        forceSSL = false;
       }
     ) cfg.services;
 
     services.dnsmasq = {
       settings = {
         cname = lib.mapAttrsToList (name: _: "${name}.${cfg.domain},${cfg.domain}") cfg.services;
+
+        # fallback dns
+        server = [
+          "1.1.1.1"
+          "1.0.0.1"
+          "8.8.8.8"
+        ];
+        domain-needed = true;
+        bogus-priv = true;
+        interface = [ "wlo1" "tailscale0" ];
+        interface-name = "${cfg.domain},tailscale0";
+        address = [ "/${cfg.domain}/100.75.140.47" ];
+        bind-dynamic = true;
       };
     };
   };

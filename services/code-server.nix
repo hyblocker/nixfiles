@@ -18,6 +18,9 @@ in
     extraGroups = [ "users" ];
     host = "0.0.0.0";
     port = code_server_port;
+    extraArguments = [
+      "--proxy-domain" "code.chungus.local"
+    ];
   };
   networking.firewall.allowedTCPPorts = [ code_server_port ];
 
@@ -26,6 +29,7 @@ in
 
     services.code = {
       port = code_server_port;
+      websockets = true;
     };
   };
 }
