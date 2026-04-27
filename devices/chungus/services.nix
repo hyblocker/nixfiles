@@ -10,6 +10,7 @@
     ../../services/utils.nix
     # custom dns, required to access web apps as we inject custom CNAME records to redirect local domains to reverse-proxy
     ../../services/dns.nix
+    ../../services/tailscale.nix # vpn
     ../../services/docker.nix
 
     # storage
