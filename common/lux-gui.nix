@@ -15,7 +15,7 @@
       peazip
       parsec-bin
       spotify
-      wireshark
+      # wireshark # broken in nixpkgs for now
       kdePackages.kate
       thunderbird-latest-unwrapped
       vrcx
