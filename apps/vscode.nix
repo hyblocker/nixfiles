@@ -52,7 +52,6 @@
                 redhat.vscode-xml
                 xaver.clang-format
                 yzhang.markdown-all-in-one
-
                 kdl-org.kdl
               ]
               ++ (with pkgs.vscode-extensions; [

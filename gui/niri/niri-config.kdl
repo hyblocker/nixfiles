@@ -156,7 +156,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 4
@@ -189,6 +189,13 @@ layout {
         // To do that, set relative-to="workspace-view".
         //
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    tab-indicator {
+        // off
+        on
+        active-color "#7fc8ff"
+        inactive-color "#505050"
     }
 
     // You can also add a border. It's similar to the focus ring, but always visible.
@@ -338,6 +345,10 @@ window-rule {
     geometry-corner-radius 0
     open-fullscreen true
     open-floating true
+    background-effect {
+        blur false
+        xray false
+    }
 }
 
 // disable middle click paste
@@ -367,6 +378,39 @@ layer-rule {
     background-effect {
         xray false
     }
+}
+
+/* Apps: blur them all without xray for a better look */
+window-rule {
+  background-effect {
+    blur true
+    xray false
+  }
+}
+
+// Blur the background behind pop-up menus in Loupe.
+window-rule {
+    match app-id="(chromium|chromium-browser)"
+
+    popups {
+        // Matches the default libadwaita pop-up corner radius.
+        geometry-corner-radius 15
+
+        // Note: it'll look better to set background opacity
+        // through your GTK theme CSS and not here.
+        // This is just an example that makes it look obvious.
+        opacity 0.75
+
+        background-effect {
+            blur true
+        }
+    }
+}
+
+// vscode
+window-rule {
+    match app-id="(code|codium)"
+    opacity 0.9
 }
 
 blur {
