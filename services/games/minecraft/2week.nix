@@ -20,7 +20,7 @@
         MAX_PLAYERS = "5";
         MOTD = "sex craft";
         USE_MEOWICE_FLAGS = "true";
-        DIFFICULTY = "1";
+        DIFFICULTY = "0";
         OPS = "HekkyVR,mtfe";
         ENABLE_WHITELIST = "true";
         WHITELIST = "HekkyVR,mtfe";
