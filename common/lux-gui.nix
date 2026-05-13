@@ -28,6 +28,8 @@
       # this will be so fucking funny if it worked
       pkgs-stable.sdvx7
       qjackctl
+
+      stremio-linux-shell
     ];
   };
 
