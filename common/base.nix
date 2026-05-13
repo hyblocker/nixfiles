@@ -64,7 +64,10 @@
   hardware.graphics.enable32Bit = true;
 
   # --- locale / timezone ---
-  time.timeZone = "Europe/Malta";
+  # auto timezone cuz i travel a lot
+  services.automatic-timezoned.enable = true;
+  services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
