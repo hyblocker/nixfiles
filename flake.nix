@@ -30,20 +30,14 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   nixConfig = {
     extra-substituters = [
       "https://niri.cachix.org" # niri nix builds
-      "https://attic.xuyh0120.win/lantian" # cachyos kernels
     ];
     extra-trusted-public-keys = [
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" # niri nix builds
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" # cachyos kernels
     ];
   };
 
@@ -60,7 +54,6 @@
       niri,
       sops-nix,
       nix-vscode-extensions,
-      nix-cachyos-kernel,
       ...
     }:
     let
@@ -118,7 +111,6 @@
           {
             nixpkgs.overlays = [
               overlays.additions
-              nix-cachyos-kernel.overlays.pinned
               inputs.nix-vscode-extensions.overlays.default
             ];
           }
@@ -139,7 +131,6 @@
           {
             nixpkgs.overlays = [
               overlays.additions
-              nix-cachyos-kernel.overlays.pinned
               inputs.nix-vscode-extensions.overlays.default
             ];
           }

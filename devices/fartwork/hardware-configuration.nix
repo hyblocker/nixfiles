@@ -22,7 +22,7 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
