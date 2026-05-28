@@ -15,5 +15,6 @@
     cmake
     ninja
     zig
+    nixd
   ];
 }
