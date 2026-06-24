@@ -146,15 +146,15 @@ pkgs.buildFHSEnv {
     export PULSE_LATENCY_MSEC=37
     export WINEARCH="win64"
     export WINEPREFIX="$SDVX_HOME/wine"
-    export WINEDLLOVERRIDES="dxgi,d3d9=n,b,d3d11=n,b,mfplat=n,b,evr=n,b"
+    export WINEDLLOVERRIDES="dxgi,d3d9=n,b,d3d11=n,b,mfplat=n,b,evr=n,b,wineasio=n,b"
     export WINEDEBUG=-all
     export DXVK_STATE_CACHE=1
     export DXVK_LOG_LEVEL=none
     export PIPEWIRE_RATE=1/44100
     export PIPEWIRE_LATENCY="32/44100"
-    export PIPEWIRE_NODE="sdvx-game"
-    export PIPEWIRE_REMOTE="pipewire-0"
-    export PIPEWIRE_PROPS='{"node.force-rate":44100, "node.force-quantum":32}'
+    #export PIPEWIRE_NODE="sdvx-game"
+    #export PIPEWIRE_REMOTE="pipewire-0"
+    #export PIPEWIRE_PROPS='{"node.force-rate":44100, "node.force-quantum":32}'
     export GST_PLUGIN_SYSTEM_PATH_1_0="${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0"
 
     if ! command -v wine64 >/dev/null; then
@@ -250,6 +250,10 @@ pkgs.buildFHSEnv {
         niri msg output "$MONITOR" mode "''${ORIG_WIDTH}x''${ORIG_HEIGHT}@''${ORIG_RATE}"
       }
 
+      # force audio config to match game
+      pw-metadata -n settings 0 clock.force-rate 44100
+      pw-metadata -n settings 0 clock.force-quantum 32
+
       niri msg output "$MONITOR" transform 90
       niri msg output "$MONITOR" mode 1920x1080@${toString (refreshRate * 1000)}
 
@@ -268,6 +272,10 @@ pkgs.buildFHSEnv {
       # game closed, kill asphyxia and restore displays
       kill $ASPHYXIA_PID
       restore_display
+
+      # restore audio settings
+      pw-metadata -n settings 0 clock.force-rate 0
+      pw-metadata -n settings 0 clock.force-quantum 0
     fi
   '';
 }
