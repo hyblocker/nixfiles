@@ -17,7 +17,7 @@
     XDG_CURRENT_DESKTOP = "niri";
     XDG_SESSION_DESKTOP = "niri";
     XDG_MENU_PREFIX = "plasma-"; # fixes dolphin not finding mime-types
-    QT_QPA_PLATFORM = "wayland";
+    QT_QPA_PLATFORM = "wayland;xcb";
     QT_QPA_PLATFORMTHEME = "gtk3";
   };
   environment.systemPackages = with pkgs; [
@@ -33,6 +33,9 @@
     fuzzel
     mako # notification daemon
     polkit_gnome # sudo gui
+
+    qt6.qtwayland
+    qt5.qtwayland
   ];
 
   # polkit systemd setup https://yalter.github.io/niri/Important-Software.html#authentication-agent
