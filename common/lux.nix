@@ -39,6 +39,11 @@
   hardware.bluetooth.settings = {
     General = {
       Experimental = true; # battery life
+
+      # Spoof Apple host (VID 0x004C) over the DID profile so AirPods and
+      # other Apple-aware peripherals expose battery and gesture features
+      # otherwise gated to Apple hosts.
+      DeviceID = "bluetooth:004C:0000:0000";
     };
   };
 
