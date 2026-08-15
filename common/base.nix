@@ -23,6 +23,7 @@
     vim
     busybox
     android-tools
+    cachix
   ];
 
   # --- User account ---
