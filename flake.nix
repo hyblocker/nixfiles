@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {
@@ -37,12 +37,12 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://niri.cachix.org" # niri nix builds
+      "https://niri-epireyn.cachix.org" # niri nix builds
       "https://noctalia.cachix.org" # noctalia nix builds
     ];
     extra-trusted-public-keys = [
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" # niri nix builds
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" # noctalia nix builds
+      "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA=" # noctalia nix builds
     ];
   };
 
