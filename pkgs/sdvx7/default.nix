@@ -5,7 +5,7 @@
 
 let
   pname = "sdvx7";
-  version = "2025122600";
+  version = "2026071400";
 
   desktopItems = [
     (pkgs.makeDesktopItem {
@@ -32,9 +32,9 @@ let
   ];
 
   gameAio = pkgs.requireFile {
-    name = "KFC-2025122600.rar";
-    sha256 = "sha256-Hu/2LoWXJs+8pXZGBluhO3kqExbUHK5N0Wi4c9lK3ow=";
-    message = "Add all in one archive: nix-store --add-fixed sha256 KFC-2025122600.rar";
+    name = "KFC-2026071400.7z";
+    sha256 = "sha256-Ws2XjnFXW2WIEauQpVeyI+sQMQiCg8f/dy5LQgYWEys=";
+    message = "Add all in one archive: nix-store --add-fixed sha256 KFC-2026071400.7z";
   };
 
   asphyxiaSrc = pkgs.fetchzip {
@@ -44,15 +44,15 @@ let
   };
 
   kfcPlugin = pkgs.fetchzip {
-    url = "https://github.com/22vv0/asphyxia_plugins/releases/download/kfc-7.0.0/kfc-7.0.0.zip";
-    sha256 = "sha256-qFX3GRchoxjgChkDnDQXHqjRqvpI5UNude51uE/FBaY=";
+    url = "https://github.com/22vv0/asphyxia_plugins/releases/download/kfc-7.1.7-fork/kfc-7.1.7-fork.zip";
+    sha256 = "sha256-s4L0YBiaYe5d/ZH8LCfNQ2GuobFfsrvlo79NQuUtKDU=";
     stripRoot = false;
   };
 
   spiceSrc = pkgs.fetchzip {
-    url = "https://github.com/spice2x/spice2x.github.io/releases/download/25-12-31/spice2x-25-12-31-full.zip";
-    sha256 = "sha256-ZCZeSw64fLMW5dS1sHEMlf5NHPcuM6I5fFr4TwyQIZo=";
-    stripRoot = true;
+    url = "https://github.com/spice2x/spice2x.github.io/releases/download/26-06-28/spice2x-26-06-28-full.zip";
+    sha256 = "sha256-9q9Efxgoxe0FQwHNBh35JZyK+9h8Rr1Dk0jflT4L4LU=";
+    stripRoot = false;
   };
 
   gameData = pkgs.stdenv.mkDerivation {
@@ -60,13 +60,13 @@ let
     srcs = [
       gameAio
     ];
-    nativeBuildInputs = [ pkgs.unrar ];
+    nativeBuildInputs = [ pkgs.p7zip ];
     unpackPhase = ''
       mkdir extract_stage
 
       echo "Extracting game data..."
 
-      unrar x ${gameAio} extract_stage/ -idq -o+ &
+      7z x ${gameAio} -oextract_stage -y > /dev/null &
       U_PID=$!
 
       while kill -0 $U_PID 2>/dev/null; do
