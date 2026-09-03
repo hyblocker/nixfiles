@@ -21,6 +21,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+    emacs
     busybox
     android-tools
     cachix
