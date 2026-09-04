@@ -18,7 +18,11 @@
     XDG_SESSION_DESKTOP = "niri";
     XDG_MENU_PREFIX = "plasma-"; # fixes dolphin not finding mime-types
     QT_QPA_PLATFORM = "wayland;xcb";
-    QT_QPA_PLATFORMTHEME = "gtk3";
+  };
+  qt = {
+    enable = true;
+    platformTheme = "kde";
+    style = "breeze";
   };
   environment.systemPackages = with pkgs; [
     wl-clipboard
@@ -36,7 +40,44 @@
 
     qt6.qtwayland
     qt5.qtwayland
+
+    gnome-themes-extra
+    kdePackages.breeze
+    adwaita-qt
+    adwaita-qt6
   ];
+
+  # darkmode
+  programs.dconf = {
+    enable = true;
+    profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            gtk-theme = "Adwaita-dark";
+          };
+        };
+      }
+    ];
+  };
+  environment.etc = {
+    "xdg/gtk-3.0/settings.ini".text = ''
+      [Settings]
+      gtk-application-prefer-dark-theme=1
+    '';
+    "xdg/gtk-4.0/settings.ini".text = ''
+      [Settings]
+      gtk-application-prefer-dark-theme=1
+    '';
+    "xdg/kdeglobals".text = ''
+      [General]
+      ColorScheme=BreezeDark
+
+      [KDE]
+      LookAndFeelPackage=org.kde.breezedark.desktop
+    '';
+  };
 
   # polkit systemd setup https://yalter.github.io/niri/Important-Software.html#authentication-agent
   security.polkit.enable = true;
@@ -90,6 +131,10 @@
         niri = {
           "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
           "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Settings" = [
+            "gnome"
+            "gtk"
+          ];
           "org.freedesktop.impl.portal.OpenURI" = [ "gtk" ];
         };
       };
@@ -103,6 +148,30 @@
   home-manager.users.lux =
     { pkgs, ... }:
     {
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+        };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+      };
+
+      qt = {
+        enable = true;
+        platformTheme.name = "kde";
+        style.name = "breeze";
+      };
+
+      dconf.settings."org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+
       programs.niri = {
         config = ''
           ${lib.fileContents ./niri-config.kdl}
