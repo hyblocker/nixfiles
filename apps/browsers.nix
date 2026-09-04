@@ -9,6 +9,7 @@
   environment.systemPackages = with pkgs; [
     (chromium.override {
       enableWideVine = true;
+      ungoogled = true;
       commandLineArgs = [
         # "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
         # "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
@@ -27,7 +28,31 @@
     # https://chromeenterprise.google/policies/
     extraOpts = {
       "AIModeSettings" = 1; # fuck gen ai
+      "DevToolsGenAiSettings" = 2;
+      "GenAIInlineImageSettings" = 2;
+      "GenAIPhotoEditingSettings" = 2;
+      "GenAISmartGroupingSettings" = 2;
+      "GenAIVcBackgroundSettings" = 2;
+      "GenAIWallpaperSettings" = 2;
+      "GenAiChromeOsSmartActionsSettings" = 2;
+      "GenAILocalFoundationalModelSettings" = 1;
+      "GenAiDefaultSettings" = 2;
+      "HelpMeReadSettings" = 2;
+      "HelpMeWriteSettings" = 2;
+      "HistorySearchSettings" = 2;
+      "SearchContentSharingSettings" = 1;
+      "SmartTabSharingSettings" = 1;
+      "TabCompareSettings" = 2;
+      "ThirdPartyAiChatSettings" = 1;
+      "VoiceTypingSettings" = 2;
+      "AutofillPredictionSettings" = 2;
+      "ChromeSuggestionsSettings" = 1;
+      "CreateThemesSettings" = 2;
+      "FindsSettings" = 2;
+      "GeminiActOnWebAllowedForURLs" = [ ];
+      "GeminiActOnWebSettings" = 1;
       "GeminiSettings" = 1;
+      "GeminiSparkSettings" = 1;
       "BrowserSignin" = 0;
       "SearchSuggestEnabled" = false;
       "UrlKeyedAnonymizedDataCollectionEnabled" = false;
