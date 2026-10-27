@@ -33,6 +33,10 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helium-flake = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -59,6 +63,7 @@
       niri,
       sops-nix,
       nix-vscode-extensions,
+      helium-flake,
       ...
     }:
     let
@@ -81,13 +86,18 @@
 
     {
 
-      baseModules = [
-        ./common/base.nix
-        ./common/lux.nix
+      flakeModules = [
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         sops-nix.nixosModules.sops
+        helium-flake.nixosModules.default
       ];
+
+      baseModules = [
+        ./common/base.nix
+        ./common/lux.nix
+      ]
+      ++ self.flakeModules;
 
       devModules = [
         ./common/dev.nix

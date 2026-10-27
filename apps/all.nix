@@ -7,7 +7,8 @@
 
 {
   imports = [
-    ./browsers.nix
+    ./chromium.nix
+    ./firefox.nix
     ./core.nix
     ./discord
     ./vscode.nix
