@@ -274,8 +274,8 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts noctalia-shell, for a fairly complete desktop environment like experience.
-spawn-at-startup "noctalia-shell"
+// This line starts noctalia, for a fairly complete desktop environment like experience.
+spawn-at-startup "noctalia"
 
 debug {
     // Allows notification actions and window activation from Noctalia
@@ -380,6 +380,19 @@ layer-rule {
     }
 }
 
+// noctalia backdrop
+layer-rule {
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
 /* Apps: blur them all without xray for a better look */
 window-rule {
   background-effect {
@@ -473,7 +486,7 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     
     // Noctalia defaults
-    Mod+Space hotkey-overlay-title="Noctalia Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+Space hotkey-overlay-title="Noctalia Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

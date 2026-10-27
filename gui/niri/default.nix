@@ -105,7 +105,6 @@
   programs.seahorse.enable = true;
   programs.ssh.askPassword = lib.mkForce "${pkgs.gnome-flashback}/libexec/seahorse/ssh-askpass";
 
-  boot.initrd.systemd.enable = true;
   # Give SDDM permission to read LUKS password for autologin
   systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
 
