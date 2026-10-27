@@ -20,6 +20,12 @@
     wheelNeedsPassword = false;
   };
 
+  # https://emudhra.we-have-a-problem.com/
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    # "emSign ECC Root CA - G3"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
