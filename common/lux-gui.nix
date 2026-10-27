@@ -43,6 +43,12 @@
         '')
       ];
     };
+    extraConfig.pipewire."92-force-rate" = {
+      "context.properties" = {
+        "resample.quality" = 10;
+        "resample.disable" = false;
+      };
+    };
   };
 
   home-manager.users.lux =

@@ -150,11 +150,6 @@ pkgs.buildFHSEnv {
     export WINEDEBUG=-all
     export DXVK_STATE_CACHE=1
     export DXVK_LOG_LEVEL=none
-    export PIPEWIRE_RATE=1/44100
-    export PIPEWIRE_LATENCY="32/44100"
-    #export PIPEWIRE_NODE="sdvx-game"
-    #export PIPEWIRE_REMOTE="pipewire-0"
-    #export PIPEWIRE_PROPS='{"node.force-rate":44100, "node.force-quantum":32}'
     export GST_PLUGIN_SYSTEM_PATH_1_0="${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0"
 
     if ! command -v wine64 >/dev/null; then
@@ -265,7 +260,7 @@ pkgs.buildFHSEnv {
       echo "Launching SOUND VOLTEX ∇ Nabla..."
       cd "$SDVX_HOME/game"
       # pipe output into iconv as the game dumps CP932 (win32 Shift-JIS) to make the output utf8 and readable in terminal
-      pw-jack wine64 spice64.exe -cfgpath $SPICECFGPATH 2>&1 | iconv -f cp932 -t utf-8 -c &
+      PIPEWIRE_RATE=44100 PIPEWIRE_LATENCY="32/44100" pw-jack wine64 spice64.exe -cfgpath $SPICECFGPATH 2>&1 | iconv -f cp932 -t utf-8 -c &
       WINE_PID=$!
       wait $WINE_PID
 
