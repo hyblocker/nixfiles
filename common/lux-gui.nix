@@ -56,7 +56,6 @@
         cascadia-code
         signal-desktop
         blender
-        streamcontroller
         fluxpose
       ];
       fonts.fontconfig.enable = true;
