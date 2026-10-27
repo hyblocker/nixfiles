@@ -10,6 +10,9 @@
   # --- boot ---
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom=DE
+  '';
 
   # --- security ---
   security.sudo = {
