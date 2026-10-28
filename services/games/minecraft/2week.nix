@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 {
   virtualisation.oci-containers = {
@@ -24,7 +28,7 @@
         OPS = "HekkyVR,mtfe";
         ENABLE_WHITELIST = "true";
         WHITELIST = "HekkyVR,mtfe";
-        
+
         SEED = "-5828909824847110575";
       };
 

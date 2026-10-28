@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.lux.reverseProxy;
@@ -13,7 +18,8 @@ let
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-      '' + lib.optionalString proxy.websockets ''
+      ''
+      + lib.optionalString proxy.websockets ''
         proxy_buffering off;
         proxy_request_buffering off;
         proxy_read_timeout 86400s;
@@ -75,7 +81,10 @@ in
         ];
         domain-needed = true;
         bogus-priv = true;
-        interface = [ "wlo1" "tailscale0" ];
+        interface = [
+          "wlo1"
+          "tailscale0"
+        ];
         interface-name = "${cfg.domain},tailscale0";
         address = [ "/${cfg.domain}/100.75.140.47" ];
         bind-dynamic = true;

@@ -7,7 +7,7 @@
 
 {
   imports = [
-    ./chromium.nix
+    ./helium.nix
     ./firefox.nix
     ./core.nix
     ./discord
