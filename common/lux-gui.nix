@@ -63,6 +63,7 @@
         signal-desktop
         blender
         fluxpose
+        darktable
       ];
       fonts.fontconfig.enable = true;
     };
