@@ -464,6 +464,10 @@ window-rule {
     open-maximized false
 }
 
+switch-events {
+    lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -483,7 +487,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "konsole"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+E hotkey-overlay-title="Launch File browser: dolphin" { spawn "dolphin"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
     
     // Noctalia defaults
     Mod+Space hotkey-overlay-title="Noctalia Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
