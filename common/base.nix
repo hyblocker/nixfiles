@@ -44,6 +44,9 @@
     pkgs-stable.sbctl
   ];
 
+  # use lix
+  nix.package = pkgs.lixPackageSets.stable.lix;
+
   # --- User account ---
   users.groups.realtime = { };
   users.users.lux = {
