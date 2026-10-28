@@ -13,6 +13,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.2.0";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
     nixcord = {
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +61,7 @@
       nixpkgs-stable,
       nixpkgs-bleeding,
       home-manager,
+      lanzaboote,
       nixcord,
       noctalia,
       nixos-hardware,
@@ -91,6 +96,7 @@
         niri.nixosModules.niri
         sops-nix.nixosModules.sops
         helium-flake.nixosModules.default
+        lanzaboote.nixosModules.lanzaboote
       ];
 
       baseModules = [

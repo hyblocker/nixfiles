@@ -2,17 +2,24 @@
   config,
   inputs,
   pkgs,
+  pkgs-stable,
   lib,
   ...
 }:
 
 {
   # --- boot ---
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom=DE
   '';
+
+  # --- secure boot ---
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 
   # --- security ---
   security.sudo = {
@@ -34,6 +41,7 @@
     busybox
     android-tools
     cachix
+    pkgs-stable.sbctl
   ];
 
   # --- User account ---
